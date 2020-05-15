@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "baseUrl": "./src",
+    "rootDir": "./src",
+    "outDir":"./dist",
+    "module": "commonjs",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+  }
+}
