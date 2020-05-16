@@ -149,7 +149,8 @@
               //Re-reverse string
                 value = [...value].reverse().join("")
               //Replace special characters with spaces if needed
-                value = value.replace(regex.processors.post.name.special_to_space, " ")
+                for (let collection of regex.processors.post.name.special_to_space)
+                  value = value.replace(collection, " ")
               console.debug(`name > post-process > current value = ${value}`)
               result.name = value
             }

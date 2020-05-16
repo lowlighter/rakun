@@ -80,10 +80,12 @@
         /(?<hevc>\bhevc\b)/,
         /(?<hevc>\bHEVC\b)/,
         /(?<dual_audio>\bDual[- ]Audio\b)/,
+        /(?<dual_audio>\bDUAL[-._ ]AUD[Ii]O\b)/,
         /(?<dts_hdma>\bDTSHDMA?\b)/,
         /(?<dts_hdma>\bDTS-?HD[-_. ]?MA(?:[-_. ]6.1)?\b)/,
         /[-_. ]?(?<avc>AVC)[-_. ]?/,
         /(?<audio_5_1>\b5\.1\b)/,
         /(?<dts>\bDTS\b)/,
+        /(?<true_hd>\bTrueHD\b)/
       ],
   })

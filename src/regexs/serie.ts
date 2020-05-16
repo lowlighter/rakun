@@ -11,6 +11,7 @@
     //Season
       season:[
         /\b[\(\[)]?[Ss]eason (?<season>\d+)[\)\]]?\b/,
+        /\bS(?<season>\d+)E\d+\b/,
         /\bS(?<season>\d+)\b/,
       ],
 
@@ -30,6 +31,7 @@
           ],
         //Single episode
           single:[
+            /\bS\d+E(?<episode>\d+)\b/,
             /\b(?<episode>0\d)\s+END\b/,
             /\b(?<episode>0\d)\b/,
             /\s(?<episode>\d{2,})$/,

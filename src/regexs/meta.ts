@@ -17,6 +17,7 @@
         /(?<remux>\b[Rr]emux(?:es)?\b)/,
         /(?<complete>\[[Cc]omplete\])/,
         /(?<batch>\bBatch\b)/,
+        /(?<extended>\bEXTENDED\b)/,
       ],
 
     //Website
