@@ -5,29 +5,31 @@
     //Cleaned name
       readonly name:string
     //Hash
-      readonly hash:string|null
+      readonly hash?:string
     //File extension
-      readonly extension:string|null
+      readonly extension?:string
     //Resolution
-      readonly resolution:string|null
-    //Quality
-      readonly quality:string|null
-    //Codec
-      readonly codec:string|null
-    //Language audio
-      readonly audio:string|null
-    //Torrent metadata
-      readonly meta:string|null
-    //Language subs
-      readonly subs:string|null
-    //Subber groups
-      readonly subber:string|null
-    //Website 
-      readonly website:string|null
+      readonly resolution?:string
+    //Source (Bluray, DVD, etc.)
+      readonly source?:string
+    //Codecs
+      readonly codecs?:string
+    //Audio language
+      readonly audio?:string
+    //Subtitles language
+      readonly subtitles:string
+    //Subber group (or translation group)
+      readonly subber:string
+    //Website of subber
+      readonly website:string
+    //Torrent other metadata (remux, repack, etc.)
+      readonly meta:string
     //Season
-      readonly season:string|null
-    //Episode
-      readonly episodes:string|null
+      readonly season:string
+    //Part
+      readonly part:string
+    //Episode (or episode range)
+      readonly episode:string
   }
 
 /** Loose type. */
