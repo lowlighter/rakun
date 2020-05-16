@@ -33,9 +33,6 @@
 /** Loose type. */
   type loose = {[key:string]:any}
 
-/** Match result. */
-  type match_result = {match:loose, regex:RegExp}
-
 /** Filter overload. */
   interface Array<T> {
     filter<U extends T>(pred: (a: T) => a is U): U[]

@@ -11,12 +11,13 @@
   const results = JSON.parse(fs.readFileSync(path.join(__dirname, "results.json")))
 
 //Compute threshold and success rate
-  const threshold = Number(argv.threshold.replace("%", ""))
+  const threshold = Number(argv.threshold.replace("%", ""))||0
   const success = 100*results.numPassedTests/results.numTotalTests
 
 //Verdict
-  console.log(`Success rate : ${success.toString().padStart(3)}%`)
-  console.log(`Threshold    : ${threshold.toString().padStart(3)}%`)
+  console.log(``)
+  console.log(`Success rate : ${success.toFixed(1).padStart(3)}%`)
+  console.log(`Threshold    : ${threshold.toFixed(1).padStart(3)}%`)
   console.log(``)
   if (success >= threshold) {
     console.log(`Result       : pass`.green)
