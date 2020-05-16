@@ -3,6 +3,11 @@
  */
   export default Object.freeze({
 
+    //Movie
+      movie:[
+        /(?<=[Mm]ovie\s)(?<movie>\d+)/,
+      ],
+
     //Season
       season:[
         /\b[\(\[)]?[Ss]eason (?<season>\d+)[\)\]]?\b/,
@@ -21,7 +26,7 @@
           range:[
             /[Ee][Pp][Ss]?\.? (?<a>\d{2,})-(?<b>\d{2,})/,
             /E(?<a>\d{2,})-E(?<b>\d{2,})/,
-            /(?<a>\d{2,})-(?<b>\d{2,})/,
+            /(?<a>\d+)-(?<b>\d+)/,
           ],
         //Single episode
           single:[

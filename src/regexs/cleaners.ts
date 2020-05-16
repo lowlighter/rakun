@@ -8,9 +8,13 @@
         //Multiples spaces (pre)
           /\s{2,}/g,
         //Special characters (either at start or end)
-          /^[-_.]/, /[-_.]$/,
+          /^[-_./]/, /[-_./]$/,
         //Special characters remnants
           /[-_.]{2,}/g,
+        //Spaces after/before brackets
+          /(?<=\[)\s/g, /\s(?=\])/g,
+        //Spaces after/before parenthesis
+          /(?<=\()\s/g, /\s(?=\))/g,
         //Isolated characters
           /(?:^| )[-_.](?: |$)/g,
         //Empty brackets

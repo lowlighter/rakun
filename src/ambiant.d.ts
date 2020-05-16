@@ -17,21 +17,23 @@
     //Audio language
       readonly audio?:string
     //Subtitles language
-      readonly subtitles:string
+      readonly subtitles?:string
     //Subber group (or translation group)
-      readonly subber:string
+      readonly subber?:string
     //Website of subber
-      readonly website:string
+      readonly website?:string
     //Content producer/distributor
-      readonly distributor:string
+      readonly distributor?:string
     //Torrent other metadata (remux, repack, etc.)
-      readonly meta:string
+      readonly meta?:string
+    //Movie
+      readonly movie?:string
     //Season
-      readonly season:string
+      readonly season?:string
     //Part
-      readonly part:string
+      readonly part?:string
     //Episode (or episode range)
-      readonly episode:string
+      readonly episode?:string
   }
 
 /** Loose type. */

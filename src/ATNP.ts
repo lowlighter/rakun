@@ -55,8 +55,9 @@
             {key:"audio", collection:regex.lang.audio, clean:false},
             {key:"subtitles", collection:regex.lang.subtitles},
             {key:"subber", collection:regex.meta.subber, get:"value", mode:"skip"},
+            {key:"movie", collection:regex.serie.movie, get:"value", mode:"skip"},
+            {key:"part", collection:regex.serie.part, get:"value", mode:"skip"},
             {key:"season", collection:regex.serie.season, get:"value", clean:false, mode:"skip"},
-            {key:"part", collection:regex.serie.part, get:"value", clean:false, mode:"skip"},
             {key:"episode", collection:regex.serie.episode.range, get:"value", clean:false, mode:"skip"},
             {key:"episode", collection:regex.serie.episode.single, get:"value", clean:false, mode:"skip"},
             {cleaners:regex.cleaners.misc},
@@ -116,7 +117,7 @@
 
         //Post-processing
           //Post-processing for season, episode and part 
-            for (let key of ["season", "episode", "part"]) {
+            for (let key of ["movie", "season", "episode", "part"]) {
               //Remove leading zeros
                 let value = result[key]
                 if (value) {
