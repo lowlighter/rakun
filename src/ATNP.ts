@@ -4,7 +4,7 @@
   export default class Parser {
 
     /** Regexs. */
-      static readonly regex = {
+      private static readonly regex = {
 
         //Cleaners
           cleaners:{
@@ -144,16 +144,29 @@
                 /\b[Pp]art[-._ ](?<part>\d)\b/,
               ],
             //Episode
-              episode:[
-                /\b(?<episode>0\d)\s+END\b/,
-                /\b(?<episode>0\d)\b/,
-              ],
+              episode:{
+                range:[
+                  /E(?<episode_a>\d{2,})-E(?<episode_b>\d{2,})/,
+                ],
+                single:[
+                  /\b(?<episode>0\d)\s+END\b/,
+                  /\b(?<episode>0\d)\b/,
+                ]
+              }
+          },
+
+        //Process
+          process:{
+            serie:{
+              range:/^(\d+) (\d+)$/,
+              single:/^(\d+)$/,
+            }
           }
       
       } as const
 
     /** Test a collection of regex on a value and return all matching regex with its captured groups. */
-      static test({value, collection, get = "key"}:{value:string, collection:RegExp[], get?:"key"|"value"}):{length:number, results:any[][], regexs:RegExp[]} {
+      private static test({value, collection, get = "key"}:{value:string, collection:RegExp[], get?:"key"|"value"}):{length:number, results:any[][], regexs:RegExp[]} {
         //Evaluate regex from collection and filter matching ones
           const matches = collection
             .map(regex => regex.test(value) ? {match:value.match(regex)?.groups, regex} : null)
@@ -167,7 +180,7 @@
       }
 
     /** Clean string with given regex, apply cleaners and trim. */
-      static clean({value, removes = []}:{value:string, removes?:RegExp[]}):string {
+      private static clean({value, removes = []}:{value:string, removes?:RegExp[]}):string {
         for (let remove of [...removes, ...this.regex.cleaners.global])
           value = value.replace(remove, " ")
         return value.trim()
@@ -196,7 +209,8 @@
             {key:"subber", collection:regex.meta.subber, get:"value"},
             {key:"season", collection:regex.serie.season, get:"value", clean:false, mode:"skip"},
             {key:"part", collection:regex.serie.part, get:"value", clean:false, mode:"skip"},
-            {key:"episode", collection:regex.serie.episode, get:"value", clean:false, mode:"skip"},
+            {key:"episode", collection:regex.serie.episode.range, get:"value", clean:false, mode:"skip"},
+            {key:"episode", collection:regex.serie.episode.single, get:"value", clean:false, mode:"skip"},
             {cleaners:regex.cleaners.misc},
           ] as unknown as {key?:string, collection?:RegExp[], get?:"key"|"value", mode?:"append"|"replace"|"skip", clean?:boolean, cleaners?:RegExp[]}[]) {
             //Parse key
@@ -252,10 +266,17 @@
           console.log(result)
 
         //Post-processing
-          //Clean leading zeros from season, episode and part 
-            for (let key of ["season", "episode", "part"])
-              if (result[key])
-                result[key] = Number(result[key]).toString()
+          //Post-processing for season, episode and part 
+            for (let key of ["season", "episode", "part"]) {
+              //Remove leading zeros
+                //Detect ranges
+                  let value = result[key]
+                  if (regex.process.serie.range.test(value))
+                    result[key] = value.split(" ").map(Number).join("-")
+                //Detect single 
+                  else if (regex.process.serie.single.test(value))
+                    result[key] = Number(value).toString()
+            }
 
         //Register name
           result.name = cleaned
