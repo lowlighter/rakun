@@ -54,7 +54,7 @@
           ],
 
         //Codecs
-          codec:[
+          codecs:[
             /\b(?<x264>x264)\b/i,
             /\b(?<h264>h264)\b/i,
             /\b(?<x265>x265)\b/i,
@@ -119,14 +119,14 @@
       }
 
     /** Clean string with given regex, apply cleaners and trim. */
-      static clean({cleaned, removes}:{cleaned:string, removes:Array<RegExp>}):string {
+      static clean({removes, value}:{value:string, removes:Array<RegExp>}):string {
         for (let remove of [...removes, ...this.regex.cleaners])
-          cleaned = cleaned.replace(remove, " ")
-        return cleaned.trim()
+          value = value.replace(remove, " ")
+        return value.trim()
       }
 
     /** Parse filename. */
-      static parse(filename:string) {
+      static parse(filename:string, {nulls = false}:{nulls?:boolean} = {}) {
         //Preparation
           const result = {filename:filename.trim()} as TorrentInfos
           const {regex} = this
@@ -137,21 +137,21 @@
             extension:{collection:regex.file.extension},
             resolution:{collection:regex.resolution},
             quality:{collection:regex.quality},
-            codec:{collection:regex.codec},
+            codecs:{collection:regex.codecs},
             audio:{collection:regex.lang.audio},
             meta:{collection:regex.meta},
             subs:{collection:regex.lang.subs},
             subber:{collection:regex.subber, get:"value"},
             website:{collection:regex.website, get:"value"},
             season:{collection:regex.season, get:"value"},
-            episodes:{collection:regex.episode, get:"value"},
+            episode:{collection:regex.episode, get:"value"},
           })] as unknown as Array<[string, {collection:Array<RegExp>, get?:"key"|"value"}]>) {
             const matches = this.test({collection, value:cleaned})
             if (matches.length) {
               (result as loose)[property] = matches.flatMap(({match}) => [...Object.entries(match)].filter(([key, value]) => value).map(([key, value]) => get === "key" ? key.replace(/^_/, "") : value)).sort().join(" ")
-              cleaned = this.clean({cleaned, removes:matches.map(({regex}) => regex)})
+              cleaned = this.clean({value:cleaned, removes:matches.map(({regex}) => regex)})
             }
-            else
+            else if (nulls)
               (result as loose)[property] = null
           }
         //Register name
