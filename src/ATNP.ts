@@ -1,169 +1,13 @@
+//Imports
+  import * as regexs from "./regexs/_"
+
 /** 
  * Anime Torrent Name Parser.
  */
-  export default class Parser {
+  export default abstract class Parser {
 
     /** Regexs. */
-      private static readonly regex = {
-
-        //Cleaners
-          cleaners:{
-            //Global cleaners (always executed at cleaning)
-              global:[
-                //Multiples spaces
-                  /\s{2,}/,
-                //Empty parenthesis or brackets
-                  /[\(\[]\s*[\)\]]/,
-                //Isolated characters
-                  / [-_.] /,
-              ],
-            //Miscelleanous cleaners
-              misc:[
-                /\bNHKG\b/,
-              ]
-          },
-
-        //File metadata
-          file:{
-            //Extension
-              extension:[
-                /(?<mkv>[.]mkv$)/,
-                /(?<mkv>\b\[MKV\]\b)/,
-                /(?<mp4>[.]mp4$)/,
-                /(?<mp4>\bMP4\b)/,
-                /(?<_7z>[.]7z$)/,
-              ],
-            //Hash
-              hash:[
-                /[\[\()](?<hash>[A-F0-9]{8})[\]\)]/,
-              ],
-          },
-        
-        //Quality
-          quality:{
-            //Sources
-              source:[
-                /(?<webdl>\bWEB[-_. ]?DL\b)/,
-                /(?<webdl>\bWEBRIP\b)/, 
-                /(?<webdl>\bWEBHD\b)/,
-                /(?<dvd>\bDVD\b)/,
-                /(?<dvd>\bDVDRIP\b)/,
-                /(?<dvd>\bNTSC\b)/,
-                /(?<dvd>\bPAL\b)/,
-                /(?<dvd>\bXVIDDVD\b)/,
-                /(?<bluray>\bBLU-?RAY\b)/,                  
-                /(?<bluray>\bHD-?DVD\b)/,               
-                /(?<bluray>\bBD\d{3,4}p\b)/,
-                /(?<bluray>BD(?=REMUX))/,            
-                /(?<bluray>\bBD\b)/,      
-                /(?<dsr>\bWS[-_. ]DSR\b)/,
-                /(?<dsr>\bDSR\b)/,
-                /(?<hdtv>\bHDTV\b)/,
-                /(?<bdrip>\bBDRIP\b)/,
-                /(?<brrip>\bBRRIP\b)/,
-                /(?<pdtv>\bPDTV\b)/,
-                /(?<sdtv>\bSDTV\b)/,
-                /(?<tvrip>\bTVRIP\b)/,
-                /(?<camrip>\bCAM[-_. ]?RIP\b)/,
-                /(?<raw>\bRAW\b)/,
-              ],
-            //Resolutions
-              resolution:[
-                /(?<_1080p>\b1080[Pp]\b)/,
-                /(?<_1080p>1920x1080)/,
-                /(?<_720p>\b720[Pp]\b)/,
-                /(?<_720p>1280x720)/,
-                /(?<_480p>\b480[Pp]\b)/,
-                /(?<_480p>640x480)/,
-                /(?<_480p>848x480)/,
-                /(?<_576p>\b576[Pp]\b)/,
-                /(?<_2160p>\b2160[Pp]\b)/,
-              ],
-            //Codecs
-              codecs:[
-                /(?<x264>\bx264\b)/,
-                /(?<h264>\bh264\b)/,
-                /(?<x265>\bx265\b)/,
-                /(?<h265>\bh265\b)/,
-                /(?<xvidhd>\bXVIDHD\b)/,
-                /(?<divx>\bdivx\b)/,
-                /(?<aac>\bAAC\b)/,
-                /[-_. ]?(?<flac>FLAC)[-_. ]?/,
-                /(?<_10bit>\b10-?bits?\b)/,
-                /(?<_8bit>\b8-?bits?\b)/,
-                /(?<hevc>\bhevc\b)/,
-                /(?<dual_audio>\bDual[- ]Audio\b)/,
-                /(?<dts_hdma>\bDTSHDMA\b)/,
-                /(?<avc>\bAVC\b)/,
-                /(?<audio_5_1>\b5\.1\b)/,
-              ],
-          },
-
-        //Meta
-          meta:{
-            //Subber, translation groups
-              subber:[
-                /^\[(?<subber>[^[]+)\]/,
-              ],
-            //Metadata
-              data:[
-                /(?<batch>\bBatch\b)/,
-                /(?<remux>\bREMUX\b)/,
-              ],
-            //Website
-              website:[
-
-              ],
-          },
-
-        //Language
-          lang:{
-            //Audio
-              audio:[
-                /(?<vo>\bVOSTFR\b)/,
-                /(?<jp>\b[Jj]apanese [Aa]udio\b)/,
-                /(?<multi>\bMULTI\b|\bMULTi\b)/,
-              ],
-            //Subtitles
-              subtitles:[
-                /(?<fr>\bVOSTFR\b)/,
-                /(?<en>\bEnglish subs?\b)/,
-                /(?<multi>\b[Mm]ulti[-_. ][Ss]ubs?\b)/,
-              ]
-          },
-
-        //Serie
-          serie:{
-            //Season
-              season:[
-                /\b[\(\[)]?[Ss]eason (?<season>\d+)[\)\]]?\b/,
-                /\bS(?<season>\d+)\b/,
-              ],
-            //Part
-              part:[
-                /\b[Pp]art[-._ ](?<part>\d)\b/,
-              ],
-            //Episode
-              episode:{
-                range:[
-                  /E(?<episode_a>\d{2,})-E(?<episode_b>\d{2,})/,
-                ],
-                single:[
-                  /\b(?<episode>0\d)\s+END\b/,
-                  /\b(?<episode>0\d)\b/,
-                ]
-              }
-          },
-
-        //Process
-          process:{
-            serie:{
-              range:/^(\d+) (\d+)$/,
-              single:/^(\d+)$/,
-            }
-          }
-      
-      } as const
+      private static readonly regex = regexs
 
     /** Test a collection of regex on a value and return all matching regex with its captured groups. */
       private static test({value, collection, get = "key"}:{value:string, collection:RegExp[], get?:"key"|"value"}):{length:number, results:any[][], regexs:RegExp[]} {
@@ -262,19 +106,16 @@
               }
           }
 
-
-          console.log(result)
-
         //Post-processing
           //Post-processing for season, episode and part 
             for (let key of ["season", "episode", "part"]) {
               //Remove leading zeros
                 //Detect ranges
                   let value = result[key]
-                  if (regex.process.serie.range.test(value))
+                  if (regex.processors.post.serie.range.test(value))
                     result[key] = value.split(" ").map(Number).join("-")
                 //Detect single 
-                  else if (regex.process.serie.single.test(value))
+                  else if (regex.processors.post.serie.single.test(value))
                     result[key] = Number(value).toString()
             }
 
