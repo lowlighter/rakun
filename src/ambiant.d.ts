@@ -22,6 +22,8 @@
       readonly subber:string
     //Website of subber
       readonly website:string
+    //Content producer/distributor
+      readonly distributor:string
     //Torrent other metadata (remux, repack, etc.)
       readonly meta:string
     //Season

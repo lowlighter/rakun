@@ -47,6 +47,7 @@
             {key:"resolution", collection:regex.quality.resolution},
             {key:"codecs", collection:regex.quality.codecs},
             {key:"source", collection:regex.quality.source},
+            {key:"distributor", collection:regex.quality.distributor},
             {key:"meta", collection:regex.meta.data},
             {key:"audio", collection:regex.lang.audio, clean:false},
             {key:"subtitles", collection:regex.lang.subtitles},

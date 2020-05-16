@@ -2,6 +2,7 @@
  * Quality related regexs (sources, resolution, codecs, etc.)
  */
   export default Object.freeze({
+
     //Sources
       source:[
         /(?<webdl>\bWEB[-_. ]?DL\b)/,
@@ -20,14 +21,33 @@
         /(?<dsr>\bWS[-_. ]DSR\b)/,
         /(?<dsr>\bDSR\b)/,
         /(?<hdtv>\bHDTV\b)/,
-        /(?<bdrip>\bBDRIP\b)/,
-        /(?<brrip>\bBRRIP\b)/,
+        /(?<bluray>\bBDRIP\b)/,
+        /(?<bluray>\bBRRIP\b)/,
         /(?<pdtv>\bPDTV\b)/,
         /(?<sdtv>\bSDTV\b)/,
         /(?<tvrip>\bTVRIP\b)/,
         /(?<camrip>\bCAM[-_. ]?RIP\b)/,
         /(?<raw>\bRAW\b)/,
+        /(?<bluray>[-_. ]BR)/,
       ],
+
+    //Distributors
+      distributor:[
+        /(?<apple_tv>\bATVP\b)/,
+        /(?<amazon>\bAMZN-DL\b)/, 
+        /(?<amazon>\bAMZN\b)/, 	
+        /(?<comedy_central>\bCC\b)/,
+        /(?<crunchy_roll>\bCR\b)/,
+        /(?<disney>\bDSNP\b)/,
+        /(?<disney>\bDSNY\b)/,
+        /(?<fox>\bFOX\b)/,
+        /(?<hulu>\bHULU\b)/,
+        /(?<disney>\bDSNY\b)/,
+        /(?<mtv>\bMTV\b)/,
+        /(?<netflix>\bNF\b)/,
+        /(?<tf1>\bTF1\b)/,
+      ],
+      
     //Resolutions
       resolution:[
         /(?<_1080p>\b1080[Pp]\b)/,
@@ -40,6 +60,7 @@
         /(?<_576p>\b576[Pp]\b)/,
         /(?<_2160p>\b2160[Pp]\b)/,
       ],
+
     //Codecs
       codecs:[
         /(?<x264>\bx264\b)/,
@@ -50,12 +71,14 @@
         /(?<divx>\bdivx\b)/,
         /(?<aac>\bAAC\b)/,
         /[-_. ]?(?<flac>FLAC)[-_. ]?/,
-        /(?<_10bit>\b10-?bits?\b)/,
+        /(?<_10bit>\b10-?[Bb]its?\b)/,
+        /(?<_10bit>)[_.-]?10bpp[_.-]?/,
         /(?<_8bit>\b8-?bits?\b)/,
         /(?<hevc>\bhevc\b)/,
+        /(?<hevc>\bHEVC\b)/,
         /(?<dual_audio>\bDual[- ]Audio\b)/,
         /(?<dts_hdma>\bDTSHDMA\b)/,
-        /(?<avc>\bAVC\b)/,
+        /[-_. ]?(?<avc>AVC)[-_. ]?/,
         /(?<audio_5_1>\b5\.1\b)/,
       ],
   })

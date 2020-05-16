@@ -2,6 +2,7 @@
  * Cleaners regexs
  */
   export default Object.freeze({
+
     //Global cleaners (always executed at cleaning)
       global:[
         //Multiples spaces
@@ -11,8 +12,11 @@
         //Isolated characters
           / [-_.] /,
       ],
+
     //Miscelleanous cleaners
       misc:[
         /\bNHKG\b/,
+        /\[\w+\]/,
       ],
+
   })

@@ -2,6 +2,7 @@
  * Processors regexs
  */
   export default Object.freeze({
+
     //Post-processors
       post:{
         //Serie post-processors
@@ -10,4 +11,5 @@
             single:/^(\d+)$/,
           },
       },
+      
   })
