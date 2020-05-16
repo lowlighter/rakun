@@ -32,6 +32,31 @@ console.log(ATNP.parse("[Team246] Ghost in the shell Stand alone complex S01 E10
 }
 ```
 
+#### 📊 What's rakun performances ?
+
+We try to gather a lot of different torrent name formats from all over the net to make **rakun** more efficient.
+You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is supported.
+
+Below is an excerpt of test outputs :
+```
+//Passing
+  √ [Leopard-Raws] Shingeki no Kyojin Season 3 Part.2 - 09 END RAW (NHKG 1280x720 x264 AAC).mp4 
+  √ [Team246] Ghost in the shell Stand alone complex S01 E10-E15 [BDREMUX 1080P MULTi DTSHDMA 5.1][VOSTFR] 
+  √ [U3-Web] PSYCHO-PASS 3 - FIRST INSPECTOR (2020) [Movie][AMZN WEB-DL(v) 1080p AVC AAC DDP SRT][Multi-Subs] (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)
+  √ [Kaerizaki-Fansub]_One-Piece_Stampede_Film_14_[VERSION-LIGHT][VOSTFR][BLU-RAY][FHD_1920x1080].mp4
+  √ Serial Experiments Lain (1998) 1080p.H264.Ac3.Ita.Flac.Jap.Eng.Sub.Ita.Eng [v2] [21GB] [stress] 
+  √ [Reaktor] From the New World - Shinsekai Yori [1080p][BD][x265][10-bit][Dual-Audio]
+  √ [T.H.X&A.I.R.nesSub][Shinsekai_Yori][BDRIP][Vol.1-9全][1920x1080_10bpp][AVC_FLAC][MKV]
+  √ [BDRip1080p.x264.AC3.ITA.ENG.JAP.].Fullmetal.Alchemist.Brotherhood + OAV Bluray RIP 
+  √ [AnimeRG] Spirited Away (2001) (Sen to Chihiro no Kamikakushi) [720p BD 10bit] [Dual Audio] [Multi-Language Subtitles] [JRR] [Studio Ghibli].mkv
+  √ Death Note 1-37 [480p] [EN SUB]
+
+//Failing
+  × Fullmetal Alchemist Brotherhood + OVAs + Specials [ShadyCrab 1080p 8bit AAC] [Dual Audio]
+  × Bleach Movie 01 - Memories of Nobody [H264 1080p DTS Ita Eng Jap SUB Ita Eng] [Rady]
+  × [千与千寻].Spirited.Away.2001.BluRay.1080p.DTS-HD.MA.6.1.x265.10bit-BeiTai&NetFriend 
+```
+
 #### 📑 Extracted informations
 
 Below is the descriptor of the possible extreacted torrent informations.
