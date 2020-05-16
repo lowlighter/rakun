@@ -1,6 +1,6 @@
-# 🦝 Anime torrent name parser
+# 🦝 Rakun - An Anime torrent name parser
 
-![Onee-chan](https://github.com/lowlighter/anime-torrent-name-parser/workflows/Onee-chan/badge.svg)
+![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg)
 
 A parser to extract informations and metadata from an anime torrent filename.
 With this, it'll be easier to script anime torrent related stuff !
@@ -79,8 +79,8 @@ Multiples values properties (codecs, audio, subtitles, etc.) are always sorted t
 
 Parsing follow the following workflow : 
   - An input `filename` is given
-  - A loop iterates through the [collection of regexs](https://github.com/lowlighter/anime-torrent-name-parser/tree/master/src/regexs) to extract informations from given `filename`
-  - At each iteration, extracted informations are removed from `filename` and [cleaners](https://github.com/lowlighter/anime-torrent-name-parser/blob/master/src/regexs/cleaners.ts) are applied to remove remnants
+  - A loop iterates through the [collection of regexs](https://github.com/lowlighter/rakun/tree/master/src/regexs) to extract informations from given `filename`
+  - At each iteration, extracted informations are removed from `filename` and [cleaners](https://github.com/lowlighter/rakun/blob/master/src/regexs/cleaners.ts) are applied to remove remnants
   - At the end of the loops, post-processors may be run for certains properties
   - Unmatched string in `filename` is considered as the cleaned title 
   - Extracted informations are returned
@@ -91,15 +91,15 @@ Note that however, it is impossible to successfully parse 100% of torrent filena
 
 #### 🏅 Code quality
 
-To ensure a quality library, code is required to pass **Onee-chan**'s judgement and fulfill a parsing accuracy of at least **90%** of defined [test cases](https://github.com/lowlighter/anime-torrent-name-parser/tree/master/tests/cases).
+To ensure a quality library, code is required to pass **Onee-chan**'s judgement and fulfill a parsing accuracy of at least **90%** of defined [test cases](https://github.com/lowlighter/rakun/tree/master/tests/cases).
 
 #### 💪 Contributing
 
 Here what you can do to contribute to this repo :
   - With a pull request
-    - Define new [tests cases](https://github.com/lowlighter/anime-torrent-name-parser/tree/master/tests/cases)
-    - Complete [regexs collection](https://github.com/lowlighter/anime-torrent-name-parser/tree/master/src/regexs)
-    - Add new features for [ATNP](https://github.com/lowlighter/anime-torrent-name-parser/tree/master/src)
+    - Define new [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases)
+    - Complete [regexs collection](https://github.com/lowlighter/rakun/tree/master/src/regexs)
+    - Add new features for [ATNP](https://github.com/lowlighter/rakun/tree/master/src)
   - With issues
     - Reports failed torrent informations extraction which should be supported
 

@@ -1,5 +1,5 @@
 {
-  "name": "anime-torrent-name-parser",
+  "name": "rakun",
   "version": "1.0.0",
   "description": "A parser for anime torrent to extract features",
   "main": "index.js",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lowlighter/anime-torrent-name-parser.git"
+    "url": "git+https://github.com/lowlighter/rakun.git"
   },
   "keywords": [
     "anime",
@@ -35,7 +35,7 @@
   "author": "lowlighter",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lowlighter/anime-torrent-name-parser/issues"
+    "url": "https://github.com/lowlighter/rakun/issues"
   },
-  "homepage": "https://github.com/lowlighter/anime-torrent-name-parser#readme"
+  "homepage": "https://github.com/lowlighter/rakun#readme"
 }
