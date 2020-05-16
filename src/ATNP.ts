@@ -18,15 +18,18 @@
         //Groups results and regexs
           return {
             length:matches.length,
-            results:matches.map(({match}) => [...Object.entries(match)].filter(([key, value]) => value).map(([key, value]) => get === "key" ? key.replace(/^_/, "") : value)).sort(),
+            results:matches.map(({match}) => [...Object.entries(match)].filter(([key, value]) => value).map(([key, value]) => get === "key" ? key.replace(/^_/, "") : value)),
             regexs:matches.map(({regex}) => regex),
           }
       }
 
     /** Clean string with given regex, apply cleaners and trim. */
-      private static clean({value, removes = []}:{value:string, removes?:RegExp[]}):string {
-        for (let remove of [...removes, ...this.regex.cleaners.global])
-          value = value.replace(remove, " ")
+      private static clean({value, removes = [], empty = {}}:{value:string, removes?:RegExp[], empty?:{parenthesis?:boolean}}):string {
+        //Preparation
+          const {parenthesis = true} = empty
+        //Apply removals
+          for (let remove of [...removes, ...this.regex.cleaners.global, ...(parenthesis ? this.regex.cleaners.special.empty.parenthesis : [])])
+            value = value.replace(remove, " ")
         return value.trim()
       }
 
@@ -51,7 +54,7 @@
             {key:"meta", collection:regex.meta.data},
             {key:"audio", collection:regex.lang.audio, clean:false},
             {key:"subtitles", collection:regex.lang.subtitles},
-            {key:"subber", collection:regex.meta.subber, get:"value"},
+            {key:"subber", collection:regex.meta.subber, get:"value", mode:"skip"},
             {key:"season", collection:regex.serie.season, get:"value", clean:false, mode:"skip"},
             {key:"part", collection:regex.serie.part, get:"value", clean:false, mode:"skip"},
             {key:"episode", collection:regex.serie.episode.range, get:"value", clean:false, mode:"skip"},
@@ -61,14 +64,14 @@
             //Parse key
               if (key) {
                 //Search for matches
-                  console.debug(`${key} : process`)
+                  console.debug(`${key} > process`)
                   const matches = this.test({collection, value:cleaned, get})
                   if (matches.length) {
                     //Retrieve group names (or values) and remove leading underscore
-                      console.debug(`${key} : ${matches.length} regex matches`)
+                      console.debug(`${key} > process > ${matches.length} regex matches`)
                       const {[key]:previous = ""} = result
                     //Evaluate mode
-                      console.debug(`${key} : mode ${mode}`)
+                      console.debug(`${key} > process > mode ${mode}`)
                       switch (mode) {
                         case "append":{
                           result[key] = [...new Set([...previous.split(" "), ...matches.results.flat()].sort())].join(" ")
@@ -80,21 +83,21 @@
                         }
                         case "skip":{
                           if (result[key]) {
-                            console.debug(`${key} : already defined, skipping`)
+                            console.debug(`${key} > process > mode skip > value already defined, skipping`)
                             continue
                           }
                           result[key] = matches.results[0].join(" ")
                           break
                         }
                       }
-                      console.debug(`${key} : previous value = ${previous||"(none)"}`)
-                      console.debug(`${key} : current value = ${result[key]}`)
+                      console.debug(`${key} > process > previous value = ${previous||"(none)"}`)
+                      console.debug(`${key} > process > current value = ${result[key]}`)
                     //Put matching regex in queue for removal
                       removes.push(...matches.regexs)
                   }
                 //Fill with null if no match and option is enabled
                   else {
-                    console.debug(`${key} : no matches`)
+                    console.debug(`${key} > process > no matches`)
                     if (nulls)
                       result[key] = null
                   }
@@ -102,30 +105,66 @@
             //Clean if needed
               if (clean) {
                 cleaned = this.clean({value:cleaned, removes:[...removes, ...cleaners]})
-                console.debug(`${key} : cleaned value = ${cleaned}`)
+                console.debug(`${key||"(meta)"} > process > cleaned value = ${cleaned}`)
                 removes.splice(0)
               }
           }
+
+        //Register name
+          result.name = cleaned
+          console.debug(`name > process > current value = ${cleaned}`)
 
         //Post-processing
           //Post-processing for season, episode and part 
             for (let key of ["season", "episode", "part"]) {
               //Remove leading zeros
-                //Detect ranges
-                  let value = result[key]
-                  if (regex.processors.post.serie.range.test(value))
-                    result[key] = value.split(" ").map(Number).join("-")
-                //Detect single 
-                  else if (regex.processors.post.serie.single.test(value))
-                    result[key] = Number(value).toString()
+                let value = result[key]
+                if (value) {
+                  //Detect ranges
+                    if (regex.processors.post.serie.range.test(value))
+                      value = value.split(" ").map(Number).join("-")
+                  //Detect single 
+                    else if (regex.processors.post.serie.single.test(value))
+                      value = Number(value).toString()
+                  console.debug(`${key} > post-process > current value = ${value}`)
+                  result[key] = value
+                }
+            }
+          //Post-processing for name
+            {
+              //Reverse string (to start removing stuff from end)
+                let value = [...result.name].reverse().map(c => { return ({"[":"]", "]":"["} as loose)[c]||c }).join("")
+              //Remove unparsable attributes
+                while (regex.cleaners.special.unparsable.test(value)) {
+                  //Edge case : title is in brackets 
+                    if (regex.cleaners.special.only_brackets.test(value)) {
+                      value = value.match(regex.cleaners.special.only_brackets)?.groups?.name as string
+                      break
+                    }
+                  //Remove unparsable brackets
+                    console.debug(`name > post-process > found unparsable value ${value.match(regex.cleaners.special.unparsable)?.groups?.unparsable}`)
+                    value = this.clean({value, removes:[regex.cleaners.special.unparsable], empty:{parenthesis:false}})   
+                }
+              //Re-reverse string
+                value = [...value].reverse().join("")
+              //Replace special characters with spaces if needed
+                value = value.replace(regex.processors.post.name.special_to_space, " ")
+              console.debug(`name > post-process > current value = ${value}`)
+              result.name = value
             }
 
-        //Register name
-          result.name = cleaned
-
         //Clean all properties (except filename)
-          for (let [key, value] of Object.entries(result))
+          for (let [key, value] of Object.entries(result)) {
             result[key] = (value === result.filename) ? value : this.clean({value, removes})
+            //Delete property if empty
+              if (!result[key]) {
+                console.debug(`${key} > post-process > deleted because empty`)
+                if (nulls)
+                  result[key] = null
+                else
+                  delete result[key]
+              }
+          }
         
         return result as TorrentInfos
       }

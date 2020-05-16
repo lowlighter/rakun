@@ -1,6 +1,5 @@
 //Dependancies
   const {default:ATNP} = require(require("path").join(__dirname, "../..", "dist/ATNP"))
-  console.debug = () => null
 
 //Tests
   ;[
@@ -66,6 +65,31 @@
       extension:"mkv",
     },
     {
+      filename:"[Lilith-Raws] 心靈判官 / Psycho-Pass Sinners of the System Case.3 [Baha][WEB-DL][1080p][AVC AAC][CHT][MKV]",
+      subber:"Lilith-Raws",
+      name:"心靈判官 / Psycho-Pass Sinners of the System Case 3",
+      source:"webdl",
+      resolution:"1080p",
+      codecs:"aac avc",
+      extension:"mkv",
+    },
+    {
+      filename:"[U3-Web] PSYCHO-PASS 3 - FIRST INSPECTOR (2020) [Movie][AMZN WEB-DL(v) 1080p AVC AAC DDP SRT][Multi-Subs] (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)",
+      subber:"U3-Web",
+      name:"PSYCHO-PASS 3 FIRST INSPECTOR (2020) (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)",
+      distributor:"amazon",
+      resolution:"1080p",
+      subtitles:"multi",
+      codecs:"aac avc",
+      source:"webdl",
+    },
+    {
+      filename:"[RLSP] One Piece - Dressrosa 629-746",
+      subber:"RLSP",
+      name:"One Piece Dressrosa",
+      episode:"629-746",
+    },
+    {
       filename:"[KaiDubs] One Piece - 575-587 [720p] [English Dub] [CC] [AMZN-DL]",
       subber:"KaiDubs",
       name:"One Piece",
@@ -75,11 +99,32 @@
       distributor:"amazon comedy_central"
     },
     {
+      filename:"One Piece Season 10 Voyage 1 (Eps. 575-587) (Dual Audio 1080p JP BD Remuxes)",
+      name:"One Piece Voyage 1",
+      season:"10",
+      episode:"575-587",
+      resolution:"1080p",
+      audio:"jp",
+      codecs:"dual_audio",
+      source:"bluray",
+      meta:"remux",
+    },
+    {
       filename:"One piece 590 X Toriko X Dragon Ball Z Crossover [animestorrent.com][Legendado][PT-BR]",
       name:"One piece 590 X Toriko X Dragon Ball Z Crossover",
       website:"animestorrent.com",
       source:"bluray",
       subber:"Legendado",
+    },
+    {
+      filename:"[Kaerizaki-Fansub]_One-Piece_Stampede_Film_14_[VERSION-LIGHT][VOSTFR][BLU-RAY][FHD_1920x1080].mp4",
+      name:"One-Piece Stampede Film 14",
+      subber:"Kaerizaki-Fansub",
+      audio:"vo",
+      subtitles:"fr",
+      source:"bluray",
+      resolution:"1080p",
+      extension:"mp4",
     },
     {
       filename:"[Cervoz] Serial Experiments Lain [1080p][MULTI][VF - VOSTFR][10Bits]",
@@ -91,8 +136,13 @@
       codecs:"10bit",
     },
     {
+      filename:"[JpU - No oficial] Serial Experiments Lain",
+      subber:"JpU No oficial",
+      name:"Serial Experiments Lain",
+    },
+    {
       filename:"Serial Experiments Lain (1998) 1080p.H264.Ac3.Ita.Flac.Jap.Eng.Sub.Ita.Eng [v2] [21GB] [stress]",
-      subber:"[stress]",
+      subber:"stress",
       name:"Serial Experiments Lain (1998)",
       resolution:"1080p",
       codecs:"ac3 flac h264",
@@ -117,58 +167,69 @@
       meta:"complete",
     },
     {
+      filename:"[hoseki]_Shinsekai_Yori_-_14-16_(BD_1080p_FLAC)",
+      subber:"hoseki",
+      name:"Shinsekai Yori",
+      episode:"14-16",
+      source:"bluray",
+      resolution:"1080p",
+      codecs:"flac",
+    },
+    {
       filename:"[T.H.X&A.I.R.nesSub][Shinsekai_Yori][BDRIP][Vol.1-9全][1920x1080_10bpp][AVC_FLAC][MKV]",
       subber:"T.H.X&A.I.R.nesSub",
       source:"bluray",
       resolution:"1080p",
       codecs:"10bit avc flac",
       extension:"mkv",
-      name:"Shinsekai_Yori",
+      name:"Shinsekai Yori",
       part:"1-9",
-    }
-  ].forEach(testable => test(testable.filename, () => expect(ATNP.parse(testable.filename)).toEqual(testable)))
-
-/*
- 
-  ,
-  "[Team246] Ghost in the Shell Arise Border 5 [BDREMUX 1080P MULTi VO-VF DTSHDMA] [VOSTFR]",
-  "[Commie] Ghost in the Shell SAC_2045 - 03 [4027CD5B].mkv",
-  "[DragsterPS] Ghost in the Shell - SAC_2045 S01 [1080p] [Japanese Audio] [Multi-Subs]",
-  "[DragsterPS] Ghost in the Shell - SAC_2045 S01 [720p] [HEVC] [Japanese Audio] [Multi-Subs]",
-  "Ghost in the Shell - SAC_2045 - Season 1 S01 - 2020 1080p Japanese Audio Multi-Sub NF WEBRip AAC5.1 x264-Rapta",
-  "[PuyaSubs!] Psycho-Pass 3 - First Inspector - 03 [1080p][1B7B0133].mkv",
-  "[Lilith-Raws] 心靈判官 / Psycho-Pass Sinners of the System Case.3 [Baha][WEB-DL][1080p][AVC AAC][CHT][MKV]",
-  "[HorribleSubs] PSYCHO-PASS 3 - First Inspector - 03 [720p].mkv",
-  "[U3-Web] PSYCHO-PASS 3 - FIRST INSPECTOR (2020) [Movie][AMZN WEB-DL(v) 1080p AVC AAC DDP SRT][Multi-Subs] (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)",
-  "[Judas] Psycho-Pass - First Inspector (Movie) [1080p][HEVC x265 10bit][Multi-Subs]",
-  "[Erai-raws] Psycho-Pass 3 - First Inspector [720p HEVC][Multiple Subtitle]",
-  "[Sunshine] Psycho-Pass 3 - 02 [DD30074B].mkv",
-  "[YnK] Psycho-Pass꞉ Sinners of the System Case.1 [BD 720p] [E0A6657B]",
-  "[桜都字幕组][心理测量者 3/PSYCHO-PASS心灵判官 3/Psycho-Pass 3][07][GB][1080P]",
-  "One Piece Season 10 Voyage 1 (Eps. 575-587) (Dual Audio 1080p JP BD Remuxes)",
-  "One piece 590 X Toriko X Dragon Ball Z Crossover [animestorrent.com][Legendado][PT-BR]",
-  
-  "[SachaOPD] One Piece Deluxe (Fan-Kai) Whole Cake Film 4 - Mégot [V2] (720p AAC VOSTFR)",
-  "[Kaerizaki-Fansub]_One-Piece_Stampede_Film_14_[VERSION-LIGHT][VOSTFR][BLU-RAY][FHD_1920x1080].mp4",
-  "[TC] [SoM] Kyutai Panic Adventure! [Dragon Ball Z] [One Piece] [Astro Boy] [CAM Rip]",
-  "[RLSP] One Piece - Dressrosa 629-746",
-  "[RLSP] One Piece - Silver Mine 747-750",
-  "[Cleo] Shinsekai yori | From the New World [Dual Audio 10bit BD720p][HEVC-x265]",
-  "",
-  "[Hayaku] Shinsekai Yori EP 3 [Multi Subs]",
-  "[JasinChen][来自新世界][新世界より][Shinsekai Yori][BDRIP 1080p][HEVC h265][Hi10P FLAC]",
-  "[AnimeRG] Shinsekai Yori (From the New World) [01-25] [Complete] [1080p] [HEVC] [TheBiscuitMan]",
-  "[JacobSwaggedUp] Shinsekai Yori | From the New World (BD 1280x720) [MP4 Batch]",
-  "[T.H.X&A.I.R.nesSub][Shinsekai_Yori][BDRIP][Vol.1-9全][1920x1080_10bpp][AVC_FLAC][MKV]",
-  "[hoseki]_Shinsekai_Yori_-_14-16_(BD_1080p_FLAC)",
-  "[UTW+5] Shinsekai Yori 17-25 + ED2 Patches.7z",
-  "[RnF] Shinsekai Yori - 24 - BD - Vostfr.mp4",
-  "Serial Experiments Lain (BDRip 1520x1080p x265 HEVC FLACx2 2.0x2)(Dual Audio)[sxales]",
-  "Serial Experiments Lain (1998) 1080p.H264.Ac3.Ita.Flac.Jap.Eng.Sub.Ita.Eng [v2] [21GB] [stress]",
-  "Serial Experiments Lain Collection 20191206 By Icetric",
-  "Serial Experiments Lain (1998) [dual audio] [720p]",
-  "[bonkai77] Serial Experiments Lain [1080p] [DUAL-AUDIO] [x265] [HEVC] [AAC] [10bit]",
-  "[AnimeRG] Serial Experiments Lain - 2 [960X720] [English Sub] [Web-DL] [Pseudo-ReleaseBitch].mkv",
-  "[JpU - No oficial] Serial Experiments Lain",
-  "",
-  */
+    },
+    {
+      filename:"[RnF] Shinsekai Yori - 24 - BD - Vostfr.mp4",
+      subber:"RnF",
+      name:"Shinsekai Yori",
+      episode:"24",
+      source:"bluray",
+      audio:"vo",
+      subtitles:"fr",
+      extension:"mp4",
+    },
+    {
+      filename:"[AT] [Moshi Moshi] Fullmetal Alchemist Brotherhood - Star Of Milos [BD 720p] [01A4B7E9][Legendado][PT_BR][AnimesTorrent]",
+      name:"Fullmetal Alchemist Brotherhood Star Of Milos",
+      hash:"01A4B7E9",
+      source:"bluray",
+      resolution:"720p",
+      subber:"Legendado",
+    },
+    {
+      filename:"[BDRip1080p.x264.AC3.ITA.ENG.JAP.].Fullmetal.Alchemist.Brotherhood + OAV Bluray RIP",
+      name:"Fullmetal Alchemist Brotherhood + OAV",
+      audio: "en ita jp",
+      source:"bluray",
+      resolution:"1080p",
+      codecs:"ac3 x264",
+    },
+  /*  {
+      filename:"[UQW] Fullmetal Alchemist: Brotherhood [BD 1080p AVC-YUV420P10 FLAC]",
+    },
+    {
+      filename:"Fullmetal Alchemist Brotherhood + OVAs + Specials [ShadyCrab 1080p 8bit AAC] [Dual Audio]",
+    },
+    {
+      filename:"[Xspitfire911] Fullmetal Alchemist Brotherhood + OAV BDRIP 1080p X265 10bit Vostfr",
+    }*/
+  ].forEach(testable => {
+    //Tester
+      const tester = () => expect(ATNP.parse(testable.filename)).toEqual(testable)
+      console.debug = () => null
+    //Apply test (only)
+      if (testable.only) {
+        delete testable.only
+        test.only(testable.filename, tester)
+      }
+    //Apply test
+      else
+        test(testable.filename, tester)
+  })
