@@ -21,7 +21,8 @@
     "test-cases": "npx jest --json --outputFile=tests/results.json || npx run-s true",
     "test-threshold": "node tests/threshold.js --threshold=90%",
     "test": "npx run-s test-cases test-threshold",
-    "build-and-test": "npx run-s clean build test"
+    "build-and-test": "npx run-s clean build test",
+    "publish-if-possible": "npm publish || true"
   },
   "repository": {
     "type": "git",
