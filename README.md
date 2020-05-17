@@ -2,8 +2,8 @@
 
 ![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg)
 
-A parser to extract informations and metadata from an anime torrent filename.
-With this, it'll be easier to script anime torrent related stuff !
+A parser to extract informations and metadata from anime torrents filename.
+With this, it'll be easier to script anime torrents related stuff !
 
 ## 💻 Usage
 
@@ -34,10 +34,10 @@ console.log(ATNP.parse("[Team246] Ghost in the shell Stand alone complex S01 E10
 
 #### 📊 What's rakun performances ?
 
-We try to gather a lot of different torrent name formats from all over the net to make **rakun** more efficient.
-You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is supported.
+We try to gather a lot of different torrents name format from all over the net to make **rakun** more efficient and reliable.
+You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is currently supported.
 
-Below is an excerpt of test outputs :
+Below is an excerpt of tests output :
 ```
 //Passing
   √ [Leopard-Raws] Shingeki no Kyojin Season 3 Part.2 - 09 END RAW (NHKG 1280x720 x264 AAC).mp4 
@@ -60,7 +60,7 @@ Below is an excerpt of test outputs :
 #### 📑 Extracted informations
 
 Below is the descriptor of the possible extreacted torrent informations.
-Multiples values properties (codecs, audio, subtitles, etc.) are always sorted to keep consistancy.
+Multiple values properties (codecs, audio, subtitles, etc.) are sorted to keep consistancy.
 
 ```typescript
 /** Torrent informations. */
@@ -82,19 +82,23 @@ Multiples values properties (codecs, audio, subtitles, etc.) are always sorted t
     //Audio language
       readonly audio?:string
     //Subtitles language
-      readonly subtitles:string
+      readonly subtitles?:string
     //Subber group (or translation group)
-      readonly subber:string
+      readonly subber?:string
     //Website of subber
-      readonly website:string
+      readonly website?:string
+    //Content producer/distributor
+      readonly distributor?:string
     //Torrent other metadata (remux, repack, etc.)
-      readonly meta:string
+      readonly meta?:string
+    //Movie
+      readonly movie?:string
     //Season
-      readonly season:string
+      readonly season?:string
     //Part
-      readonly part:string
+      readonly part?:string
     //Episode (or episode range)
-      readonly episode:string
+      readonly episode?:string
   }
 ```
 
@@ -102,32 +106,40 @@ Multiples values properties (codecs, audio, subtitles, etc.) are always sorted t
 
 #### 🧬 ATNP's logic
 
-Parsing follow the following workflow : 
+Parsing follows the following workflow : 
   - An input `filename` is given
   - A loop iterates through the [collection of regexs](https://github.com/lowlighter/rakun/tree/master/src/regexs) to extract informations from given `filename`
   - At each iteration, extracted informations are removed from `filename` and [cleaners](https://github.com/lowlighter/rakun/blob/master/src/regexs/cleaners.ts) are applied to remove remnants
-  - At the end of the loops, post-processors may be run for certains properties
+  - At the end of the loop, post-processors may be run for specific properties
   - Unmatched string in `filename` is considered as the cleaned title 
   - Extracted informations are returned
   
-The main loop order is important, as it tries to match first what can be accurately extracted and removed early (like hash, extension, website, etc.) to ease the remaining extraction, whereas closely related informations (like season, parts and episode) may not be cleaned once matched to help successive extraction.
+The main loop order is important, as it tries to match first what can be accurately extracted and removed early (like hash, extension, website, etc.) to ease the remaining extraction, while closely related informations (like season, parts and episode) may not be cleaned instantly to refine successive extraction.
 
-Note that however, it is impossible to successfully parse 100% of torrent filename, but ATNP wil try to keep a success rate of **90%**.
+While the aim is to reach 100% accuracy, note that this objective is impossible since there are too much outliers in naming conventions.
 
 #### 🏅 Code quality
 
 To ensure a quality library, code is required to pass **Onee-chan**'s judgement and fulfill a parsing accuracy of at least **90%** of defined [test cases](https://github.com/lowlighter/rakun/tree/master/tests/cases).
 
+Pull requests may not be merged if they do not reach this standard, unless they are adding revelant tests which may reveal missed matches in current builds. Although edges cases should be integrated to challenge **rakun**, simpler cases should also be added to not biases **Onee-chan**'s evaluation.
+
 #### 💪 Contributing
 
-Here what you can do to contribute to this repo :
-  - With a pull request
-    - Define new [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases)
-    - Complete [regexs collection](https://github.com/lowlighter/rakun/tree/master/src/regexs)
-    - Add new features for [ATNP](https://github.com/lowlighter/rakun/tree/master/src)
-  - With issues
-    - Reports failed torrent informations extraction which should be supported
+Want to contribute ? Sugoï ! Here what you can help with :
 
+##### Open a pull request to
+  - Add new features for [rakun](https://github.com/lowlighter/rakun/tree/master/src)
+  - Complete [regexs collection](https://github.com/lowlighter/rakun/tree/master/src/regexs)
+  - Define new [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases)
+  
+#### Open an issue to
+  - Reports bugs or unsupported format that should be
+  - Ask help
+
+#### 🧾 License
+
+**rakun** is licensed under the [MIT License](https://github.com/lowlighter/rakun/blob/master/LICENSE).
 
 
 
