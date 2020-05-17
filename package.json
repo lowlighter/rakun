@@ -1,5 +1,5 @@
 {
-  "name": "rakun",
+  "name": "@lowlighter/rakun",
   "version": "1.0.0",
   "description": "A parser for anime torrent to extract features",
   "main": "index.js",
