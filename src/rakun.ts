@@ -42,6 +42,14 @@
           const {regex} = this
           let cleaned = filename.trim()
 
+        //Pre-processing
+          //Extract asian content
+            {
+              for (let collection of regex.processors.pre.name.asian_content)
+                cleaned = cleaned.replace(collection, "$<content>")
+              console.debug(`(meta) > pre-process > cleaned value = ${cleaned}`)
+            }
+
         //Apply parsing
           for (let {key = "", collection = [], get = "key", mode = "append", clean = true, cleaners = []} of [
             {key:"hash", collection:regex.file.hash, get:"value"},
@@ -58,8 +66,10 @@
             {key:"movie", collection:regex.serie.movie, get:"value", mode:"skip"},
             {key:"part", collection:regex.serie.part, get:"value", mode:"skip"},
             {key:"season", collection:regex.serie.season, get:"value", clean:false, mode:"skip"},
-            {key:"episode", collection:regex.serie.episode.range, get:"value", clean:false, mode:"skip"},
-            {key:"episode", collection:regex.serie.episode.single, get:"value", clean:false, mode:"skip"},
+            {key:"episode", collection:regex.serie.episode.range.replace, get:"value", clean:false},
+            {key:"episode", collection:regex.serie.episode.single.replace, get:"value", clean:false},
+            {key:"episode", collection:regex.serie.episode.range.skip, get:"value", clean:false, mode:"skip"},
+            {key:"episode", collection:regex.serie.episode.single.skip, get:"value", clean:false, mode:"skip"},
             {cleaners:regex.cleaners.misc},
           ] as unknown as {key?:string, collection?:RegExp[], get?:"key"|"value", mode?:"append"|"replace"|"skip", clean?:boolean, cleaners?:RegExp[]}[]) {
             //Parse key
@@ -116,34 +126,62 @@
           console.debug(`name > process > current value = ${cleaned}`)
 
         //Post-processing
+            let reject = []
           //Post-processing for season, episode and part 
             for (let key of ["movie", "season", "episode", "part"]) {
               //Remove leading zeros
                 let value = result[key]
                 if (value) {
                   //Detect ranges
-                    if (regex.processors.post.serie.range.test(value))
-                      value = value.split(" ").map(Number).join("-")
+                    if (regex.processors.post.serie.range.test(value)) {
+                      const [a, b] = value.split(" ")
+                      //If range is not ascending or upper limit has leading zero while lower hasn't, lower limit is probably not part of a range
+                        if ((Number(a) > Number(b))||((regex.processors.post.serie.leading_zero.test(b))&&(!regex.processors.post.serie.leading_zero.test(a)))) {
+                          console.debug(`${key} > post-process > invalid range or formatting mistmatch, accepting ${b} but rejecting ${a}`)
+                          value = Number(b).toString()
+                          reject.push(a)
+                        }
+                        else 
+                          value = [a, b].map(Number).join("-")
+                    }
                   //Detect single 
-                    else if (regex.processors.post.serie.single.test(value))
+                    else if (regex.processors.post.serie.single.test(value)) 
                       value = Number(value).toString()
                   console.debug(`${key} > post-process > current value = ${value}`)
                   result[key] = value
                 }
             }
+          //Post-processing for codecs
+            {
+              let value = result.codecs
+              if (value) {
+                //If codecs includes both DTS and DTS HDMA, only keep latter version
+                  if (regex.processors.post.codecs.dts_hdma_duplicates.test(value))
+                    value = value.replace(regex.processors.post.codecs.dts_hdma_duplicates, "dts_hdma")
+                console.debug(`codecs > post-process > current value = ${value}`)
+                result.codecs = value
+              }
+            }
           //Post-processing for name
             {
               //Reverse string (to start removing stuff from end)
-                let value = [...result.name].reverse().map(c => { return ({"[":"]", "]":"["} as loose)[c]||c }).join("")
+                let value = [...`${result.name} ${reject.join(" ")}`].reverse().map(c => { return ({"[":"]", "]":"["} as loose)[c]||c }).join("").trim()
               //Remove unparsable attributes
                 while (regex.cleaners.special.unparsable.test(value)) {
                   //Edge case : title is in brackets 
                     if (regex.cleaners.special.only_brackets.test(value)) {
+                      console.debug(`name > post-process > last attribute, assuming it is name`)
                       value = value.match(regex.cleaners.special.only_brackets)?.groups?.name as string
                       break
                     }
+                  //Edge case : no subber has been detected yet but attribute is candidate for it
+                    else if ((!result.subber)&&(regex.processors.post.subber.possible_subber_name.test(value))) {
+                      result.subber = [...value.match(regex.processors.post.subber.possible_subber_name)?.groups?.subber as string].reverse().join("")
+                      console.debug(`name > post-process > found unparsable value which may be subber (${result.subber})`)
+                    }
                   //Remove unparsable brackets
-                    console.debug(`name > post-process > found unparsable value ${value.match(regex.cleaners.special.unparsable)?.groups?.unparsable}`)
+                    else
+                      console.debug(`name > post-process > found unparsable value ${value.match(regex.cleaners.special.unparsable)?.groups?.unparsable}`)
                     value = this.clean({value, removes:[regex.cleaners.special.unparsable], empty:{parenthesis:false}})   
                 }
               //Re-reverse string

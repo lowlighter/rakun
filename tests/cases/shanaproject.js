@@ -1,5 +1,5 @@
 //Dependancies
-const {default:ATNP} = require(require("path").join(__dirname, "../..", "dist/ATNP"))
+  const tester = require(require("path").join(__dirname, "..", "tester"))
 
 //Tests
   ;[
@@ -12,17 +12,18 @@ const {default:ATNP} = require(require("path").join(__dirname, "../..", "dist/AT
     },
     {
       filename:"Dragon.Ball.Z.Movie.14.Battle.of.Gods.2013.EXTENDED.DUAL.AUDiO.SUB.PL.1080p.BluRay.REMUX.AVC.TrueHD.5.1-SeBoLeX",
-      name:"Dragon.Ball.Z.Movie.14.Battle.of.Gods.2013.",
+      name:"Dragon Ball Z Movie 14 Battle of Gods 2013",
       source:"bluray",
       meta:"extended remux",
       codecs:"audio_5_1 avc dual_audio true_hd",
       resolution:"1080p",
       subber:"SeBoLeX",
+      subtitles:"pl",
     },
     {
       filename:"[USS] Dragon Ball Z - Resurrection F ⁄ Fukkatsu no F (2015) (Dual Audio) [BD 1080p H264 AC3]",
       subber:"USS",
-      name:"Dragon Ball Z Resurrection F ⁄ Fukkatsu no F (2015)",
+      name:"Dragon Ball Z - Resurrection F ⁄ Fukkatsu no F (2015)",
       source:"bluray",
       resolution:"1080p",
       codecs:"ac3 dual_audio h264"
@@ -30,22 +31,70 @@ const {default:ATNP} = require(require("path").join(__dirname, "../..", "dist/AT
     {
       filename:"[Erai-raws] Dragon Ball Super - Broly [BD 1080p][AVC-YUV444P10][TrueHD].mkv",
       subber:"Erai-raws",
-      name:"Dragon Ball Super Broly",
+      name:"Dragon Ball Super - Broly",
       source:"bluray",
       resolution:"1080p",
       codecs:"avc true_hd",
       extension:"mkv",
+    },
+    {
+      filename:"[NoobSubs] Yakusoku no Neverland 01-12 (720p 8bit AAC MP4)",
+      subber:"NoobSubs",
+      name:"Yakusoku no Neverland",
+      episode:"1-12",
+      resolution:"720p",
+      codecs:"8bit aac",
+      extension:"mp4",
+    },
+    {
+      filename:"[Erai-raws] Yakusoku no Neverland - 01 ~ 12 [1080p][Multiple Subtitle]",
+      subber:"Erai-raws",
+      name:"Yakusoku no Neverland",
+      episode:"1-12",
+      resolution:"1080p",
+      subtitles:"multi",
+    },
+    {
+      filename:"[Erai-raws] Yakusoku no Neverland - 12 END [720p][Multiple Subtitle].mkv",
+      subber:"Erai-raws",
+      name:"Yakusoku no Neverland",
+      episode:"12",
+      resolution:"720p",
+      subtitles:"multi",
+      extension:"mkv",
+    },
+    {
+      filename:"[NoobSubs] Berserk 2017 13-24 (1080p 8bit AAC MP4)",
+      subber:"NoobSubs",
+      name:"Berserk 2017",
+      episode:"13-24",
+      resolution:"1080p",
+      codecs:"8bit aac",
+      extension:"mp4",
+    },
+    {
+      filename:"[Hi10] Berserk (2016) [BD 1080p]",
+      subber:"Hi10",
+      name:"Berserk (2016)",
+      source:"bluray",
+      resolution:"1080p",
+    },
+    {
+      filename:"[Erai-raws] Berserk 2017 - 12 [v2][END][720p][Multiple Subtitle][10A073DC].mkv",
+      subber:"Erai-raws",
+      name:"Berserk 2017",
+      episode:"12",
+      resolution:"720p",
+      subtitles:"multi",
+      hash:"10A073DC",
+      extension:"mkv",
+    },
+    {
+      filename:"[HorribleSubs] Berserk - 23 [480p].mkv",
+      subber:"HorribleSubs",
+      name:"Berserk",
+      episode:"23",
+      resolution:"480p",
+      extension:"mkv",
     }
-  ].forEach(testable => {
-    //Tester
-      const tester = () => expect(ATNP.parse(testable.filename)).toEqual(testable)
-      console.debug = () => null
-    //Apply test (only)
-      if (testable.only) {
-        delete testable.only
-        test.only(testable.filename, tester)
-      }
-    //Apply test
-      else
-        test.only(testable.filename, tester)
-  })
+  ].forEach(tester)

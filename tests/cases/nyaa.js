@@ -1,5 +1,5 @@
 //Dependancies
-  const {default:ATNP} = require(require("path").join(__dirname, "../..", "dist/ATNP"))
+  const tester = require(require("path").join(__dirname, "..", "tester"))
 
 //Tests
   ;[
@@ -36,7 +36,7 @@
     {
       filename:"[DragsterPS] Ghost in the Shell - SAC_2045 S01 [1080p] [Japanese Audio] [Multi-Subs]",
       subber:"DragsterPS",
-      name:"Ghost in the Shell SAC_2045",
+      name:"Ghost in the Shell - SAC_2045",
       season:"1",
       resolution:"1080p",
       audio:"jp",
@@ -58,7 +58,7 @@
     {
       filename:"[PuyaSubs!] Psycho-Pass 3 - First Inspector - 03 [1080p][1B7B0133].mkv",
       subber:"PuyaSubs!",
-      name:"Psycho-Pass 3 First Inspector",
+      name:"Psycho-Pass 3 - First Inspector",
       episode: "3",
       resolution:"1080p",
       hash:"1B7B0133",
@@ -76,7 +76,7 @@
     {
       filename:"[U3-Web] PSYCHO-PASS 3 - FIRST INSPECTOR (2020) [Movie][AMZN WEB-DL(v) 1080p AVC AAC DDP SRT][Multi-Subs] (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)",
       subber:"U3-Web",
-      name:"PSYCHO-PASS 3 FIRST INSPECTOR (2020) (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)",
+      name:"PSYCHO-PASS 3 - FIRST INSPECTOR (2020) (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)",
       distributor:"amazon",
       resolution:"1080p",
       subtitles:"multi",
@@ -86,7 +86,7 @@
     {
       filename:"[RLSP] One Piece - Dressrosa 629-746",
       subber:"RLSP",
-      name:"One Piece Dressrosa",
+      name:"One Piece - Dressrosa",
       episode:"629-746",
     },
     {
@@ -137,7 +137,7 @@
     },
     {
       filename:"[JpU - No oficial] Serial Experiments Lain",
-      subber:"JpU No oficial",
+      subber:"JpU - No oficial",
       name:"Serial Experiments Lain",
     },
     {
@@ -152,7 +152,7 @@
     {
       filename:"[Reaktor] From the New World - Shinsekai Yori [1080p][BD][x265][10-bit][Dual-Audio]",
       subber:"Reaktor",
-      name:"From the New World Shinsekai Yori",
+      name:"From the New World - Shinsekai Yori",
       resolution:"1080p",
       source:"bluray",
       codecs:"10bit dual_audio x265",
@@ -197,11 +197,11 @@
     },
     {
       filename:"[AT] [Moshi Moshi] Fullmetal Alchemist Brotherhood - Star Of Milos [BD 720p] [01A4B7E9][Legendado][PT_BR][AnimesTorrent]",
-      name:"Fullmetal Alchemist Brotherhood Star Of Milos",
+      name:"Fullmetal Alchemist Brotherhood - Star Of Milos",
       hash:"01A4B7E9",
       source:"bluray",
       resolution:"720p",
-      subber:"Legendado",
+      subber:"Moshi Moshi",
     },
     {
       filename:"[BDRip1080p.x264.AC3.ITA.ENG.JAP.].Fullmetal.Alchemist.Brotherhood + OAV Bluray RIP",
@@ -238,7 +238,7 @@
     },
     {
       filename:"Bleach Movie 01 - Memories of Nobody [H264 1080p DTS Ita Eng Jap SUB Ita Eng] [Rady]",
-      name:"Bleach Movie Memories of Nobody",
+      name:"Bleach Movie - Memories of Nobody",
       codecs:"dts h264",
       resolution:"1080p",
       audio:"en ita jp",
@@ -281,7 +281,7 @@
     },
     {
       filename:"[Dragonier] Sen to Chihiro no Kamikakushi - Spirited Away [1080p][6.1ch - FLAC][86FFE17E].mkv",
-      name:"Sen to Chihiro no Kamikakushi Spirited Away",
+      name:"Sen to Chihiro no Kamikakushi - Spirited Away",
       subber:"Dragonier",
       resolution:"1080p",
       hash:"86FFE17E",
@@ -324,16 +324,4 @@
       episode:"1-37",
       subtitles:"en",
     }
-  ].forEach(testable => {
-    //Tester
-      const tester = () => expect(ATNP.parse(testable.filename)).toEqual(testable)
-      console.debug = () => null
-    //Apply test (only)
-      if (testable.only) {
-        delete testable.only
-        test.only(testable.filename, tester)
-      }
-    //Apply test
-      else
-        test(testable.filename, tester)
-  })
+  ].forEach(tester)

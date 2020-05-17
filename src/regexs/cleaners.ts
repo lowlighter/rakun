@@ -10,13 +10,13 @@
         //Special characters (either at start or end)
           /^[-_./]/, /[-_./]$/,
         //Special characters remnants
-          /[-_.]{2,}/g,
+          /[-_.]{2,}/g, /[.]$/,
         //Spaces after/before brackets
           /(?<=\[)\s/g, /\s(?=\])/g,
         //Spaces after/before parenthesis
           /(?<=\()\s/g, /\s(?=\))/g,
         //Isolated characters
-          /(?:^| )[-_.](?: |$)/g,
+          /(?:^| )[_.](?: |$)/g,
         //Empty brackets
           /[\[]\s*[\]]/g,
         //Multiples spaces (post)

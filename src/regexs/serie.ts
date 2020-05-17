@@ -24,18 +24,28 @@
     //Episode
       episode:{
         //Episodes ranges
-          range:[
-            /[Ee][Pp][Ss]?\.? (?<a>\d{2,})-(?<b>\d{2,})/,
-            /E(?<a>\d{2,})-E(?<b>\d{2,})/,
-            /(?<a>\d+)-(?<b>\d+)/,
-          ],
+          range:{
+            skip:[
+              /[Ee][Pp][Ss]?\.? (?<a>\d{2,})-(?<b>\d{2,})/,
+              /E(?<a>\d{2,})-E(?<b>\d{2,})/,
+              /(?<a>\d+)\s?[-~]\s?(?<b>\d+)/,
+            ],
+            replace:[
+
+            ],
+          },
         //Single episode
-          single:[
-            /\bS\d+E(?<episode>\d+)\b/,
-            /\b(?<episode>0\d)\s+END\b/,
-            /\b(?<episode>0\d)\b/,
-            /\s(?<episode>\d{2,})$/,
-          ],
+          single:{
+            skip:[
+              /\bS\d+E(?<episode>\d+)\b/,
+              /\b(?<episode>0\d+)\b/,
+              /\s(?<episode>0\d+)$/,
+              /- \b(?<episode>\d+)\b/,
+            ],
+            replace:[
+              /\b(?<episode>\d{2,})\s+END\b/,
+            ],
+          }
       },
 
   })

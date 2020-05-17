@@ -4,7 +4,7 @@
   const colors = require("colors")
   const argv = require("minimist")(process.argv.slice(2), {
     alias:{t:"threshold"},
-    default:{threshold:"80%"}
+    default:{threshold:"90%"}
   })
 
 //Parse results
