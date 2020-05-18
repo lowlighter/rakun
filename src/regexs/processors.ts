@@ -27,13 +27,13 @@
             //Replace underscore or dots with spaces
               special_to_space:[
                 /(?<=[a-z])_(?=[A-Z0-9])/g,
-                /(?<=[ A-Za-z0-9一-龯])\.(?=[A-Za-z一-龯])/g,
-                /(?<=[ A-Za-z一-龯])\.(?=[A-Za-z0-9一-龯])/g,
+                /(?<=[ A-Za-z0-9一-龯])\.(?=[([A-Za-z一-龯])/g,
+                /(?<=[ A-Za-z一-龯])\.(?=[([A-Za-z0-9一-龯])/g,
               ],
             //Isolated characters (including dash)
               isolated:[
                 /[-_.+]\s[-_.+]/g,
-                /[\[(]\s[-_.+]\s[\])]/g,
+                /[\[(]\s[-_.+,]\s[\])]/g,
                 /[-_.+]\s*$/g,
               ]
           },

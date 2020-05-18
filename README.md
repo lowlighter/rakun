@@ -115,7 +115,7 @@ While the aim is to reach 100% accuracy, note that this objective is impossible 
 
 #### 🏅 Code quality
 
-To ensure a quality library, code is required to pass **Onee-chan**'s judgement and fulfill a parsing accuracy of at least **90%** of defined [test cases](https://github.com/lowlighter/rakun/tree/master/tests/cases).
+To ensure a quality library, code is required to pass **Onee-chan**'s judgement and fulfill a parsing accuracy of at least **85%** of defined [test cases](https://github.com/lowlighter/rakun/tree/master/tests/cases).
 
 Pull requests may not be merged if they do not reach this standard, unless they are adding revelant tests which may reveal missed matches in current builds. Although edges cases should be integrated to challenge **rakun**, simpler cases should also be added to not biases **Onee-chan**'s evaluation.
 

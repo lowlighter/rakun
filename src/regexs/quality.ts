@@ -16,6 +16,7 @@
         /(?<webdl>\bWEB[-_. ]?DL\b)/,
         /(?<webdl>\bWEBRIP\b)/, 
         /(?<webdl>\bWEBHD\b)/,
+        /(?<webdl>\bONA\b)/,
         /(?<dvd>\bDVD\b)/,
         /(?<dvd>\bDVDR[Ii]P\b)/,
         /(?<dvd>\b[Dd]vd\s?[Rr]ip\b)/,
@@ -49,6 +50,8 @@
         /(?<netflix>\bNF\b)/,
         /(?<tf1>\bTF1\b)/,
         /(?<bs11>\bBS11\b)/,
+        /(?<tv_asahi>\bTV Asahi\b)/,
+        /(?<tokyo_tv>\bTokyo TV\b)/,
       ],
       
     //Resolutions
@@ -90,6 +93,7 @@
         /[-_. ]?(?<avc>AVC)[-_. ]?/,
         /(?<audio_5_1>\b(?:DD)?5\.1\b)/,
         /(?<dts>\bDTS\b)/,
-        /(?<true_hd>\bTrueHD\b)/
+        /(?<true_hd>\bTrueHD\b)/,
+        /(?<lpcm>\bLPCM\b)/,
       ],
   })

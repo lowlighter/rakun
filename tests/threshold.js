@@ -6,7 +6,7 @@
   const git = require("simple-git/promise")(path.join(__dirname, ".."))
   const argv = require("minimist")(process.argv.slice(2), {
     alias:{t:"threshold"},
-    default:{threshold:"90%"}
+    default:{threshold:"85%"}
   })
 
 //Process

@@ -325,5 +325,34 @@
       resolution:"480p",
       episode:"1-37",
       subtitles:"en",
+    },
+    {
+      filename:"[HyperX] Fairy Tail - Season 6 [480p][Tagalog]",
+      subber:"HyperX",
+      name:"Fairy Tail",
+      season:"6",
+      resolution:"480p",
+    },
+    {
+      filename:"[AC] Fairy Tail 278-328",
+      subber:"AC",
+      name:"Fairy Tail",
+      episode:"278-328",
+    },
+    {
+      filename:"[Judas] Fairy Tail (2009-2014) (Seasons 1-8 + OVAs) [BD 1080p][HEVC x265 10bit][Dual-Audio][Eng-Subs]",
+      name:"Fairy Tail (2009-2014)",
+      subber:"Judas",
+      seasons:"1-8",
+      source:"bluray",
+      resolution:"1080p",
+      codecs:"10bit dual_audio hevc x264",
+      subtitles:"en",
+    },
+    {
+      filename:"Fairy Tail - 100 Years Quest 036-038 [MangaStream]",
+      name:"Fairy Tail - 100 Years Quest",
+      episode:"36-38",
+      subber:"MangaStream",
     }
   ].forEach(tester)
