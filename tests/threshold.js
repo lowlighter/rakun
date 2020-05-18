@@ -12,7 +12,6 @@
 ;(async function () {
   //Parse results
     const results = JSON.parse(fs.readFileSync(path.join(__dirname, "results.json")))
-    console.log(``)
 
   //Compute threshold and success rate
     const threshold = Number(argv.threshold.replace("%", ""))||0
@@ -20,6 +19,8 @@
 
   //Update result
     if (process.env.BADGES_TOKEN) {
+      console.log(``)
+      console.log(`BADGES_TOKEN is defined`)
       try {
         await axios.post("https://badges.lecoq.io/memory", {
           token:process.env.BADGES_TOKEN,
@@ -38,6 +39,7 @@
     }
 
   //Verdict
+    console.log(``)
     console.log(`Success rate : ${success.toFixed(1).padStart(3)}%`)
     console.log(`Threshold    : ${threshold.toFixed(1).padStart(3)}%`)
     console.log(``)
@@ -49,4 +51,4 @@
       console.log(`Result       : failed`.red)
       process.exit(1)
     }
-})
+})()
