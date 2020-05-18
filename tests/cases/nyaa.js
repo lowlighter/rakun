@@ -183,7 +183,7 @@
       codecs:"10bit avc flac",
       extension:"mkv",
       name:"Shinsekai Yori",
-      part:"1-9",
+      episode:"1-9",
     },
     {
       filename:"[RnF] Shinsekai Yori - 24 - BD - Vostfr.mp4",

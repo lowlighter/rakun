@@ -10,7 +10,7 @@
         //Subber is usually at start of filename
           /^\[(?<subber>[-A-Za-z&! 0-9.]+)\]/,
         //Subber at end of filename
-          /-(?<subber>[A-Za-z][A-Za-z&!0-9.]{5,})$/,
+          /-(?<subber>[A-Za-z][A-Za-z&!0-9.]{3,})$/,
       ],
 
     //Metadata

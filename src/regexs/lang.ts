@@ -9,15 +9,17 @@
         /(?<en>\b[Ee]nglish [Dd]ub\b)/,
         /(?<en>\b[[Dd]ubbed [Ee]nglish\b)/,
         /(?<vo>\bVOSTFR\b|\b[Vv]ostfr\b)/,
+        /(?<multi>\b[Mm]ulti[-_. ][Aa]udio\b)/,
         /(?<multi>\bMULT[Ii]\b)/,
         /(?<jp>\bJap\b|\bJAP\b)/,
         /(?<en>\bEng\b|\bENG\b)/,
         /(?<ita>\bIta\b|\bITA\b)/,
-        /(?<fr>\bVFR?\b)/,
+        /(?<fr>\bVF[FR]?\b)/,
+        /(?<fr>\bFrench?\b)/,
         /(?<jp>\bJP\b)/,
       ],
 
-    //Subtitles
+    //Subtitles 	
       subtitles:[
         /(?<multi>[Mm]ulti[- ][Ll]anguage [Ss]ub(?:title)?s?)/,
         /(?<multi>[Mm]ultiple [Ss]ub(?:title)?s?)/,

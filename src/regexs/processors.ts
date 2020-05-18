@@ -28,7 +28,9 @@
               special_to_space:[
                 /(?<=[a-z])_(?=[A-Z0-9])/g,
                 /(?<=[ \w一-龯])\.(?=[\w一-龯])/g,
-              ]
+              ],
+            //Isolated characters (including dash)
+              isolated:/[_.-]\s[_.-]/g,
           },
         //Codecs
           codecs:{

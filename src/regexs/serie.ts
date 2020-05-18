@@ -11,6 +11,7 @@
     //Season
       season:[
         /\b[\(\[)]?[Ss]eason (?<season>\d+)[\)\]]?\b/,
+        /\b[\(\[)]?[Ss]aison (?<season>\d+)[\)\]]?\b/,
         /\bS(?<season>\d+)E\d+\b/,
         /\bS(?<season>\d+)\b/,
       ],
@@ -18,7 +19,6 @@
     //Part
       part:[
         /\b[Pp]art[-._ ](?<part>\d)\b/,
-        /\b[Vv]ol[-._ ](?<a>\d+)-(?<b>\d+)\b/,
       ],
 
     //Episode
@@ -26,6 +26,7 @@
         //Episodes ranges
           range:{
             skip:[
+              /\b[-._ ]?[Vv]ol[-._ ]?(?<a>\d+)-(?<b>\d+)\b/,
               /[Ee][Pp][Ss]?\.? (?<a>\d{2,})-(?<b>\d{2,})/,
               /E(?<a>\d{2,})-E(?<b>\d{2,})/,
               /(?<a>\d+)\s?[-~]\s?(?<b>\d+)/,

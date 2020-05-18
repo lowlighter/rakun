@@ -10,7 +10,7 @@
         /(?<bluray>\bBR(?:RIP|[Rr]ip)\b)/,
         /(?<=[^A-Za-z])(?<bluray>B[RD])(?=[^A-Za-z])/, 
         /(?<bluray>\bBLU-?RAY\b)/,              
-        /(?<bluray>\b[Bb]lu[Rr]ay\b)/,                  
+        /(?<bluray>\b[Bb]lu-?[Rr]ay\b)/,                  
         /(?<bluray>\bHD-?DVD\b)/, 
         /(?<bluray>BD(?=REMUX))/,  
         /(?<webdl>\bWEB[-_. ]?DL\b)/,
@@ -18,6 +18,7 @@
         /(?<webdl>\bWEBHD\b)/,
         /(?<dvd>\bDVD\b)/,
         /(?<dvd>\bDVDRIP\b)/,
+        /(?<dvd>\b[Dd]vd\s?[Rr]ip\b)/,
         /(?<dvd>\bNTSC\b)/,
         /(?<dvd>\bPAL\b)/,
         /(?<dvd>\bXVIDDVD\b)/,
@@ -27,6 +28,7 @@
         /(?<pdtv>\bPDTV\b)/,
         /(?<sdtv>\bSDTV\b)/,
         /(?<tvrip>\bTVRIP\b)/,
+        /(?<tvrip>\bTV-?[Rr]ip\b)/,
         /(?<camrip>\bCAM[-_. ]?RIP\b)/,
         /(?<raw>\bRAW\b)/,
       ],
@@ -50,9 +52,9 @@
       
     //Resolutions
       resolution:[
-        /(?<_1080p>1080[Pp])/,
+        /(HD\s?)?(?<_1080p>1080[Pp])/,
         /(?<_1080p>1920x1080)/,
-        /(?<_720p>720[Pp])/,
+        /(HD\s?)?(?<_720p>720[Pp])/,
         /(?<_720p>1280x720)/,
         /(?<_480p>480[Pp])/,
         /(?<_480p>640x480)/,
@@ -84,7 +86,7 @@
         /(?<dts_hdma>\bDTSHDMA?\b)/,
         /(?<dts_hdma>\bDTS-?HD[-_. ]?MA(?:[-_. ]6.1)?\b)/,
         /[-_. ]?(?<avc>AVC)[-_. ]?/,
-        /(?<audio_5_1>\b5\.1\b)/,
+        /(?<audio_5_1>\b(?:DD)?5\.1\b)/,
         /(?<dts>\bDTS\b)/,
         /(?<true_hd>\bTrueHD\b)/
       ],
