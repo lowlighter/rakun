@@ -18,7 +18,7 @@
 //Update result
   if (process.env.BADGES_TOKEN) {
     axios.post("https://badges.lecoq.io/memory", {
-      token:BADGES_TOKEN,
+      token:process.env.BADGES_TOKEN,
       rakun_tests_passed:results.numPassedTests,
       rakun_tests_total:results.numTotalTests,
       rakun_tests_accuracy:`${success.toFixed(1).padStart(3)}%`,
