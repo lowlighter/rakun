@@ -25,3 +25,4 @@ jobs:
     - run: npm run publish-if-possible
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
+      BADGES_TOKEN: ${{ secrets.BADGES_TOKEN }}
