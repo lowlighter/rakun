@@ -10,8 +10,8 @@ With this, it'll be easier to script anime torrents related stuff !
 #### ⏪ With the following code...
 
 ```typescript
-import ATNP from "ATNP"
-console.log(ATNP.parse("[Team246] Ghost in the shell Stand alone complex S01 E10-E15 [BDREMUX 1080P MULTi DTSHDMA 5.1][VOSTFR]"))
+import rakun from "rakun"
+console.log(rakun.parse("[Team246] Ghost in the shell Stand alone complex S01 E10-E15 [BDREMUX 1080P MULTi DTSHDMA 5.1][VOSTFR]"))
 ```
 
 #### ⏩ You'll get the following output :
@@ -35,7 +35,7 @@ console.log(ATNP.parse("[Team246] Ghost in the shell Stand alone complex S01 E10
 #### 📊 What's rakun performances ?
 
 We try to gather a lot of different torrents name format from all over the net to make **rakun** more efficient and reliable.
-You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is currently supported.
+You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is currently supported. 
 
 Below is an excerpt of tests cases which may help you to check **rakun**'s capabilities :
 ```
