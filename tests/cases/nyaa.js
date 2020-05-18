@@ -147,7 +147,8 @@
       resolution:"1080p",
       codecs:"ac3 flac h264",
       audio:"en ita jp",
-      subtitles:"en ita"
+      subtitles:"en ita",
+      meta:"v2",
     },
     {
       filename:"[Reaktor] From the New World - Shinsekai Yori [1080p][BD][x265][10-bit][Dual-Audio]",
@@ -301,12 +302,13 @@
     {
       filename:"[AnimeRG] Death Note Complete [01-37] [Dual Audio] [480p BD] [10bit] [Multi-Subs] [JRR]",
       subber:"AnimeRG",
-      name:"Death Note Complete",
+      name:"Death Note",
       episode:"1-37",
       codecs:"10bit dual_audio",
       subtitles:"multi",
       source:"bluray",
       resolution:"480p",
+      meta:"complete"
     },
     {
       filename:"[SOFCJ-Raws] Death Note (BDRip 1920x1080 x264 10bit VFR FLAC)",

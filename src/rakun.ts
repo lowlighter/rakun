@@ -186,8 +186,17 @@
                 }
               //Re-reverse string
                 value = [...value].reverse().join("")
+              //Post-processor name refiners
+                {
+                  //If audio is not defined or doesn't include multi but post processor test is positive
+                    if (((!result.audio)||(!result.audio.includes("multi")))&&(regex.processors.post.audio.possible_multi_audio.test(value))) {
+                      result.audio = [...new Set([...(result.audio||"").split(" "), "multi"].sort())].join(" ")
+                      console.debug(`audio > post-process > current value = ${result.audio}`)
+                      value = this.clean({value, removes:[regex.processors.post.audio.possible_multi_audio]})   
+                    }
+                }
               //Replace special characters with spaces if needed
-                for (let collection of [...regex.processors.post.name.special_to_space, regex.processors.post.name.isolated])
+                for (let collection of [...regex.processors.post.name.special_to_space, ...regex.processors.post.name.isolated])
                   value = value.replace(collection, " ")
               console.debug(`name > post-process > current value = ${value}`)
               result.name = value

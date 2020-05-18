@@ -15,7 +15,8 @@
         /(?<en>\bEng\b|\bENG\b)/,
         /(?<ita>\bIta\b|\bITA\b)/,
         /(?<fr>\bVF[FR]?\b)/,
-        /(?<fr>\bFrench?\b)/,
+        /(?<fr>\bFrench\b)/,
+        /(?<fr>\bFRENCH\b)/,
         /(?<jp>\bJP\b)/,
       ],
 

@@ -88,6 +88,7 @@
       subtitles:"multi",
       hash:"10A073DC",
       extension:"mkv",
+      meta:"v2",
     },
     {
       filename:"[HorribleSubs] Berserk - 23 [480p].mkv",

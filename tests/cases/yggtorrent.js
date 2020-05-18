@@ -5,7 +5,7 @@
   ;[
     {
       filename:"One.Piece.Vol49-80.SAGA.WATER.SEVEN.Multi.Dvdrip.x264-MANGACITY",
-      name:"One Piece SAGA.WATER.SEVEN",
+      name:"One Piece SAGA WATER SEVEN",
       episode:"49-80",
       audio:"multi",
       source:"dvd",
@@ -58,7 +58,7 @@
       source:"bluray",
       meta:"remux",
       codecs:"audio_5_1 avc dts_hdma h264",
-      audio:"fr",
+      audio:"fr multi",
       subber:"Team246",
     },
     {
@@ -69,6 +69,52 @@
       codecs:"10bit aac audio_5_1 x265",
       source:"bluray",
       subber:"Punisher694",
+    },
+    {
+      filename:"Death.Parade.1080p.COMPLETE.BluRay.Coffret.Multi-DragonMax",
+      name:"Death Parade",
+      resolution:"1080p",
+      meta:"complete pack",
+      source:"bluray",
+      subber:"DragonMax",
+      audio:"multi",
+    },
+    {
+      filename:"Death Parade S01 (2015) + Death Billiards MULTi 1080p 10bits BluRay x265 AAC v2 -Punisher694",
+      name:"Death Parade (2015) + Death Billiards",
+      audio:"multi",
+      season:"1",
+      resolution:"1080p",
+      source:"bluray",
+      codecs:"10bit aac x265",
+      subber:"Punisher694",
+      meta:"v2",
+    },
+    {
+      filename:"11 Films Naruto + Naruto Shippuden + Boruto - MULTI (VF + VOSTFR)",
+      name:"11 Films Naruto + Naruto Shippuden + Boruto",
+      audio:"fr multi vo",
+      subtitles:"fr",
+    },
+    {
+      filename:"Naruto.SD.Rock.Lee.no.Seishun.Full-Power.Ninden.S01.FRENCH.DVDRiP.x264-Kazelle",
+      name:"Naruto SD Rock Lee no Seishun Full-Power Ninden",
+      season:"1",
+      audio:"fr",
+      source:"dvd",
+      codecs:"x264",
+      subber:"Kazelle"
+    },
+    {
+      filename:"[Fansub Resistance] Naruto Shippuden Saison 18 [H264- 720p HD] VOSTFR HQ",
+      subber:"Fansub Resistance",
+      name:"Naruto Shippuden",
+      season:"18",
+      codecs:"h264",
+      resolution:"720p",
+      audio:"vo",
+      subtitles:"fr",
+      meta:"high_quality",
     }
   ].forEach(tester)
 

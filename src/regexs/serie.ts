@@ -41,7 +41,7 @@
               /\bS\d+E(?<episode>\d+)\b/,
               /\b(?<episode>0\d+)\b/,
               /\s(?<episode>0\d+)$/,
-              /- \b(?<episode>\d+)\b/,
+              /- \b(?<episode>\d+)(?= |$)\b/,
             ],
             replace:[
               /\b(?<episode>\d{2,})\s+END\b/,

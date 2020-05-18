@@ -18,8 +18,14 @@
         /(?<remux>\bREMUX(?:ES)?\b)/,
         /(?<remux>\b[Rr]emux(?:es)?\b)/,
         /(?<complete>\[[Cc]omplete\])/,
+        /(?<complete>COMPLETE)/,
+        /(?<complete>Complete (?:[Ss]eries)?)/,
+        /(?<high_quality>\b[Hh]igh [Qq]uality\b)/,
         /(?<batch>\bBatch\b)/,
         /(?<extended>\bEXTENDED\b)/,
+        /(?<pack>\bCoffret\b)/,
+        /(?<v2>\b[Vv]2\b)/,
+        /(?<high_quality>\bHQ\b)/,
       ],
 
     //Website

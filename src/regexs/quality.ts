@@ -5,7 +5,7 @@
 
     //Sources
       source:[
-        /(?<bluray>\b[Bb]luray (?:RIP|[Rr]ip)\b)/,
+        /(?<bluray>\b[Bb]lu-?[Rr]ay (?:RIP|[Rr]ip)\b)/,
         /(?<bluray>\bBD(?:RIP|[Rr]ip)\b)/,
         /(?<bluray>\bBR(?:RIP|[Rr]ip)\b)/,
         /(?<=[^A-Za-z])(?<bluray>B[RD])(?=[^A-Za-z])/, 
@@ -17,7 +17,7 @@
         /(?<webdl>\bWEBRIP\b)/, 
         /(?<webdl>\bWEBHD\b)/,
         /(?<dvd>\bDVD\b)/,
-        /(?<dvd>\bDVDRIP\b)/,
+        /(?<dvd>\bDVDR[Ii]P\b)/,
         /(?<dvd>\b[Dd]vd\s?[Rr]ip\b)/,
         /(?<dvd>\bNTSC\b)/,
         /(?<dvd>\bPAL\b)/,
@@ -48,13 +48,14 @@
         /(?<mtv>\bMTV\b)/,
         /(?<netflix>\bNF\b)/,
         /(?<tf1>\bTF1\b)/,
+        /(?<bs11>\bBS11\b)/,
       ],
       
     //Resolutions
       resolution:[
-        /(HD\s?)?(?<_1080p>1080[Pp])/,
+        /(HD\s?)?(?<_1080p>1080[Pp])(\s?HD)?/,
         /(?<_1080p>1920x1080)/,
-        /(HD\s?)?(?<_720p>720[Pp])/,
+        /(HD\s?)?(?<_720p>720[Pp])(\s?HD)?/,
         /(?<_720p>1280x720)/,
         /(?<_480p>480[Pp])/,
         /(?<_480p>640x480)/,
@@ -78,6 +79,7 @@
         /(?<flac>\bFlac\b)/,
         /(?<_10bit>\b10-?[Bb]its?\b)/,
         /[_.-]?(?<_10bit>10bpp)[_.-]?/,
+        /(?<_10bit>H[iI]10P)/,
         /(?<_8bit>\b8-?bits?\b)/,
         /(?<hevc>\bhevc\b)/,
         /(?<hevc>\bHEVC\b)/,

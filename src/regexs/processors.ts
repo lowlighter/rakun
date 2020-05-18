@@ -27,10 +27,15 @@
             //Replace underscore or dots with spaces
               special_to_space:[
                 /(?<=[a-z])_(?=[A-Z0-9])/g,
-                /(?<=[ \w一-龯])\.(?=[\w一-龯])/g,
+                /(?<=[ A-Za-z0-9一-龯])\.(?=[A-Za-z一-龯])/g,
+                /(?<=[ A-Za-z一-龯])\.(?=[A-Za-z0-9一-龯])/g,
               ],
             //Isolated characters (including dash)
-              isolated:/[_.-]\s[_.-]/g,
+              isolated:[
+                /[-_.+]\s[-_.+]/g,
+                /[\[(]\s[-_.+]\s[\])]/g,
+                /[-_.+]\s*$/g,
+              ]
           },
         //Codecs
           codecs:{
@@ -41,7 +46,12 @@
           subber:{
             //Check if attribute may be a possible subber name if none has been detected before
               possible_subber_name:/\[(?<subber>[-A-Za-z&! 0-9.]+)\]/,
-          }
+          },
+        //Audio
+          audio:{
+            //Maybe it was impossible to determine wether it was multi subs or multi audio, assuming audio if remaining
+              possible_multi_audio:/[Mm]ulti$/,
+          },
       },
 
   })
