@@ -1,6 +1,6 @@
 # 🦝 Rakun - An Anime torrent name parser
 
-![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg)
+![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg) ![Tests passed](https://badges.lecoq.io/rakun.tests)
 
 A parser to extract informations and metadata from anime torrents filename.
 With this, it'll be easier to script anime torrents related stuff !
