@@ -8,6 +8,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "axios": "^0.19.2",
     "colors": "^1.4.0",
     "jest": "^26.0.1",
     "minimist": "^1.2.5",
