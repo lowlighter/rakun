@@ -10,6 +10,7 @@
 
 //Parse results
   const results = JSON.parse(fs.readFileSync(path.join(__dirname, "results.json")))
+  console.log(``)
 
 //Compute threshold and success rate
   const threshold = Number(argv.threshold.replace("%", ""))||0
@@ -23,10 +24,11 @@
       rakun_tests_total:results.numTotalTests,
       rakun_tests_accuracy:`${success.toFixed(1).padStart(3)}%`,
     })
+    console.log(`Sent results to https://badges.lecoq.io/memory`)
+    console.log(``)
   }
 
 //Verdict
-  console.log(``)
   console.log(`Success rate : ${success.toFixed(1).padStart(3)}%`)
   console.log(`Threshold    : ${threshold.toFixed(1).padStart(3)}%`)
   console.log(``)
