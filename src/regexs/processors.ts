@@ -21,6 +21,8 @@
             range:/^\s*(\d+)\s+(\d+)\s*$/,
             single:/^\s*(\d+)\s*$/,
             leading_zero:/^\s*0\d+\s*$/,
+            //Maybe it was impossible to match episode number previously (1 is not enough, 4 may be date)
+              possible_episode:/\s+(?<episode>\d{2,3})\s*$/,
           },
         //Name
           name:{

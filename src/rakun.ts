@@ -194,6 +194,12 @@
                       console.debug(`audio > post-process > current value = ${result.audio}`)
                       value = this.clean({value, removes:[regex.processors.post.audio.possible_multi_audio]})   
                     }
+                  //If episode is not definned, we may be able to find it
+                    if ((!result.episode)&&(regex.processors.post.serie.possible_episode.test(value))) {
+                      result.episode = value.match(regex.processors.post.serie.possible_episode)?.groups?.episode
+                      console.debug(`episode > post-process > current value = ${result.episode}`)
+                      value = this.clean({value, removes:[regex.processors.post.serie.possible_episode]})   
+                    }
                 }
               //Replace special characters with spaces if needed
                 for (let collection of [...regex.processors.post.name.special_to_space, ...regex.processors.post.name.isolated])
