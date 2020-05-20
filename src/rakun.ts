@@ -1,5 +1,5 @@
 //Imports
-  import * as regexs from "./regexs/_"
+  import * as Regexs from "./regexs/_"
 
 /**
  * Anime Torrent Name Parser.
@@ -7,14 +7,14 @@
   export default abstract class Parser {
 
     /** Regexs. */
-      private static readonly regexs = regexs
+      private static readonly regexs = Regexs
 
     /** Test a collection of regex on a value and return all matching regex with its captured groups. */
       private static test({value, collection, get = "key"}:{value:string, collection:RegExp[], get?:"key"|"value"}):{length:number, results:any[][], regexs:RegExp[]} {
         //Evaluate regex from collection and filter matching ones
           const matches = collection
             .map(regex => regex.test(value) ? {match:value.match(regex)?.groups, regex} : null)
-            .filter((value):value is  {match:loose, regex:RegExp} => !!value)
+            .filter((match):match is  {match:loose, regex:RegExp} => !!match)
         //Groups results and regexs
           return {
             length:matches.length,
@@ -28,7 +28,7 @@
         //Preparation
           const {parenthesis = true} = empty
         //Apply removals
-          for (let remove of [...removes, ...this.regexs.cleaners.global, ...(parenthesis ? this.regexs.cleaners.special.empty.parenthesis : [])])
+          for (const remove of [...removes, ...this.regexs.cleaners.global, ...(parenthesis ? this.regexs.cleaners.special.empty.parenthesis : [])])
             value = value.replace(remove, " ")
         return value.trim()
       }
@@ -88,7 +88,7 @@
                   const {regexs} = data
                   let {cleaned} = data
                 //Iterate on asian content regexs
-                  for (let regex of regexs.processors.pre.name.asian_content)
+                  for (const regex of regexs.processors.pre.name.asian_content)
                     cleaned = cleaned.replace(regex, "$<content>")
                   console.debug(`(meta) > pre-process > cleaned value = ${cleaned}`)
                 data.cleaned = cleaned
@@ -100,7 +100,7 @@
               const {result, removes, options} = data
               let {cleaned} = data
             //Loop over arguments
-              for (let {key = "", collection = [], get = "key", mode = "append", clean = true, cleaners = []} of args) {
+              for (const {key = "", collection = [], get = "key", mode = "append", clean = true, cleaners = []} of args) {
                 //Parse key
                   if (key) {
                     //Search for matches
@@ -160,7 +160,7 @@
                 //Initialization
                   const {result, rejects, regexs} = data
                 //Iterate on move, season, episode and part properties
-                  for (let key of ["movie", "season", "episode", "part"]) {
+                  for (const key of ["movie", "season", "episode", "part"]) {
                     //Remove leading zeros
                       let value = result[key]
                       if (value) {
@@ -240,7 +240,7 @@
                       }
                   }
                 //Replace special characters with spaces if needed
-                  for (let regex of [...regexs.processors.post.name.special_to_space, ...regexs.processors.post.name.isolated])
+                  for (const regex of [...regexs.processors.post.name.special_to_space, ...regexs.processors.post.name.isolated])
                     value = value.replace(regex, " ")
                 console.debug(`name > post-process > current value = ${value}`)
                 result.name = value
@@ -250,7 +250,7 @@
                 //Initialization
                   const {result, removes, options} = data
                 //Clean all properties
-                  for (let [key, value] of Object.entries(result)) {
+                  for (const [key, value] of Object.entries(result)) {
                     result[key] = (value === result.filename) ? value : Parser.clean({value, removes})
                     //Delete property if empty
                       if (!result[key]) {

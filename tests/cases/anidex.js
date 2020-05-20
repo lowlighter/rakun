@@ -132,7 +132,6 @@
       extension:"mkv",
       resolution:"544p",
       meta:"remastered",
-    //  only:true,
     }
   ].forEach(tester)
 
