@@ -43,6 +43,8 @@
           /SUB\s?[-_.\w+]*?(?<en>ENG?)/,
           /[Ss]ubs?\s?[-_.\w]*?(?<ita>[Pp]l)/,
           /SUB\s?[-_.\w+]*?(?<pl>PL)/,
+          /[Ss]ubs?\s?[-_.\w]*?(?<es>[Ee]sp?)/,
+          /SUB\s?[-_.\w+]*?(?<es>ESP?)/,
           /(?<ita>\bIta\b)/,
           /(?<en>\bEng\b)/,
         ],
