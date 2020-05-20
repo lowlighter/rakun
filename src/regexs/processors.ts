@@ -34,9 +34,9 @@
               ],
             //Isolated characters (including dash)
               isolated:[
-                /[-_.+]\s[-_.+]/g,
+                /[-_.+,]\s[-_.+,]/g,
                 /[\[(]\s[-_.+,]\s[\])]/g,
-                /[-_.+]\s*$/g,
+                /[-_.+,]\s*$/g,
               ]
           },
         //Codecs

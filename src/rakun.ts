@@ -50,16 +50,25 @@
             {key:"source", collection:regexs.quality.source},
             {key:"distributor", collection:regexs.quality.distributor},
             {key:"meta", collection:regexs.meta.data},
-            {key:"audio", collection:regexs.lang.audio, clean:false},
-            {key:"subtitles", collection:regexs.lang.subtitles},
+            {key:"audio", collection:regexs.lang.audio.extract},
+            {key:"audio", collection:regexs.lang.audio.keep, clean:false},
+            {key:"subtitles", collection:regexs.lang.subtitles.extract},
+            {key:"subtitles", collection:regexs.lang.subtitles.keep, clean:false},
             {key:"subber", collection:regexs.meta.subber, get:"value", mode:"skip"},
             {key:"movie", collection:regexs.serie.movie, get:"value", mode:"skip"},
-            {key:"part", collection:regexs.serie.part, get:"value", mode:"skip"},
-            {key:"season", collection:regexs.serie.season, get:"value", clean:false, mode:"skip"},
-            {key:"episode", collection:regexs.serie.episode.range.replace, get:"value", clean:false},
-            {key:"episode", collection:regexs.serie.episode.single.replace, get:"value", clean:false},
-            {key:"episode", collection:regexs.serie.episode.range.skip, get:"value", clean:false, mode:"skip"},
-            {key:"episode", collection:regexs.serie.episode.single.skip, get:"value", clean:false, mode:"skip"},
+            {key:"part", collection:regexs.serie.part.range.extract, get:"value"},
+            {key:"part", collection:regexs.serie.part.single.extract, get:"value"},
+            {key:"part", collection:regexs.serie.part.range.keep, get:"value", mode:"skip"},
+            {key:"part", collection:regexs.serie.part.single.keep, get:"value", mode:"skip"},
+            {key:"season", collection:regexs.serie.season.range.extract, get:"value"},
+            {key:"season", collection:regexs.serie.season.single.extract, get:"value"},
+            {key:"season", collection:regexs.serie.season.range.keep, get:"value", clean:false, mode:"skip"},
+            {key:"season", collection:regexs.serie.season.single.keep, get:"value", clean:false, mode:"skip"},
+            {key:"episode", collection:regexs.serie.episode.range.extract, get:"value"},
+            {key:"episode", collection:regexs.serie.episode.single.extract, get:"value"},
+            {key:"episode", collection:regexs.serie.episode.range.keep, get:"value", clean:false, mode:"skip"},
+            {key:"episode", collection:regexs.serie.episode.single.keep, get:"value", clean:false, mode:"skip"},
+            {key:"meta", collection:regexs.meta.data},
             {cleaners:regexs.cleaners.misc},
           )
         //Post-processing
@@ -150,7 +159,6 @@
               serie(data:parser_data) {
                 //Initialization
                   const {result, rejects, regexs} = data
-                  let {cleaned} = data
                 //Iterate on move, season, episode and part properties
                   for (let key of ["movie", "season", "episode", "part"]) {
                     //Remove leading zeros
@@ -158,7 +166,7 @@
                       if (value) {
                         //Detect ranges
                           if (regexs.processors.post.serie.range.test(value)) {
-                            const [a, b] = value.split(" ")
+                            const [a, b] = value.trim().split(" ")
                             //If range is not ascending or upper limit has leading zero while lower hasn't, lower limit is probably not part of a range
                               if ((Number(a) > Number(b))||((regexs.processors.post.serie.leading_zero.test(b))&&(!regexs.processors.post.serie.leading_zero.test(a)))) {
                                 console.debug(`${key} > post-process > invalid range or formatting mistmatch, accepting ${b} but rejecting ${a}`)

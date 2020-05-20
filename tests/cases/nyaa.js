@@ -222,8 +222,9 @@
     },
     {
       filename:"Fullmetal Alchemist Brotherhood + OVAs + Specials [ShadyCrab 1080p 8bit AAC] [Dual Audio]",
-      name:"Fullmetal Alchemist Brotherhood + OVAs + Specials",
+      name:"Fullmetal Alchemist Brotherhood",
       resolution:"1080p",
+      meta:"has_ovas has_specials",
       codecs:"8bit aac dual_audio",
       subber:"ShadyCrab",
     },
@@ -342,11 +343,12 @@
     {
       filename:"[Judas] Fairy Tail (2009-2014) (Seasons 1-8 + OVAs) [BD 1080p][HEVC x265 10bit][Dual-Audio][Eng-Subs]",
       name:"Fairy Tail (2009-2014)",
+      meta:"has_ovas",
       subber:"Judas",
-      seasons:"1-8",
+      season:"1-8",
       source:"bluray",
       resolution:"1080p",
-      codecs:"10bit dual_audio hevc x264",
+      codecs:"10bit dual_audio hevc x265",
       subtitles:"en",
     },
     {

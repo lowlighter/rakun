@@ -42,11 +42,11 @@
     },
     {
       filename:"Highschool Of The Dead Complete Series + OVA (High Quality)(Dual Audio) MKV [1080p] Blu-Ray Rip (V2)",
-      name:"Highschool Of The Dead + OVA",
+      name:"Highschool Of The Dead",
       extension:"mkv",
       resolution:"1080p",
       source:"bluray",
-      meta:"complete high_quality v2",
+      meta:"complete has_ovas high_quality v2",
       codecs:"dual_audio",
     },
     {
@@ -54,7 +54,7 @@
       subber:"anime4life",
       name:"High School Of The Dead",
       episode:"1-12",
-      meta:"complete",
+      meta:"complete has_ovas",
       source:"bluray",
       resolution:"1080p",
       codecs:"10bit ac3 dual_audio hevc x265",
@@ -124,13 +124,15 @@
     },
     {
       filename:"Saint.Seiya.(Remastered).E022.544p.x265.HEVC.(Eng,Spa,Fre)-BZ.mkv",
-      name:"Saint Seiya (Remastered)",
+      name:"Saint Seiya",
       episode:"22",
       codecs:"hevc x265",
       audio:"en fr sp",
       subber:"BZ",
       extension:"mkv",
       resolution:"544p",
+      meta:"remastered",
+    //  only:true,
     }
   ].forEach(tester)
 

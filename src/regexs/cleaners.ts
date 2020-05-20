@@ -16,7 +16,7 @@
         //Spaces after/before parenthesis
           /(?<=\()\s/g, /\s(?=\))/g,
         //Isolated characters
-          /(?:^| )[_.](?: |$)/g,
+          /(?:^| )[_.] /g,
         //Empty brackets
           /[\[]\s*[\]]/g,
         //Multiples spaces (post)
