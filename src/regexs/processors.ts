@@ -1,4 +1,4 @@
-/** 
+/**
  * Processors regexs
  */
   export default Object.freeze({

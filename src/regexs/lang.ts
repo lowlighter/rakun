@@ -1,4 +1,4 @@
-/** 
+/**
  * Language related regexs
  */
   export default Object.freeze({
@@ -22,7 +22,7 @@
         /(?<sp>\bSpa\b)/,
       ],
 
-    //Subtitles 	
+    //Subtitles
       subtitles:[
         /(?<multi>[Mm]ulti[- ][Ll]anguage [Ss]ub(?:title)?s?)/,
         /(?<multi>[Mm]ultiple [Ss]ub(?:title)?s?)/,

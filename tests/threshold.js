@@ -32,7 +32,7 @@
         })
         console.log(`Update badge : success`)
         console.log(``)
-      } 
+      }
       catch (error) {
         console.log(`Update badge : failed`.orange)
         console.log(`${error.response}`.red)

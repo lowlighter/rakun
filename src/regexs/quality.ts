@@ -1,4 +1,4 @@
-/** 
+/**
  * Quality related regexs (sources, resolution, codecs, etc.)
  */
   export default Object.freeze({
@@ -8,13 +8,13 @@
         /(?<bluray>\b[Bb]lu-?[Rr]ay (?:RIP|[Rr]ip)\b)/,
         /(?<bluray>\bBD(?:RIP|[Rr]ip)\b)/,
         /(?<bluray>\bBR(?:RIP|[Rr]ip)\b)/,
-        /(?<=[^A-Za-z])(?<bluray>B[RD])(?=[^A-Za-z])/, 
-        /(?<bluray>\bBLU-?RAY\b)/,              
-        /(?<bluray>\b[Bb]lu-?[Rr]ay\b)/,                  
-        /(?<bluray>\bHD-?DVD\b)/, 
-        /(?<bluray>BD(?=REMUX))/,  
+        /(?<=[^A-Za-z])(?<bluray>B[RD])(?=[^A-Za-z])/,
+        /(?<bluray>\bBLU-?RAY\b)/,
+        /(?<bluray>\b[Bb]lu-?[Rr]ay\b)/,
+        /(?<bluray>\bHD-?DVD\b)/,
+        /(?<bluray>BD(?=REMUX))/,
         /(?<webdl>\bWEB[-_. ]?DL\b)/,
-        /(?<webdl>\bWEBRIP\b)/, 
+        /(?<webdl>\bWEBRIP\b)/,
         /(?<webdl>\bWEBHD\b)/,
         /(?<webdl>\bONA\b)/,
         /(?<dvd>\bDVD\b)/,
@@ -37,8 +37,8 @@
     //Distributors
       distributor:[
         /(?<apple_tv>\bATVP\b)/,
-        /(?<amazon>\bAMZN-DL\b)/, 
-        /(?<amazon>\bAMZN\b)/, 	
+        /(?<amazon>\bAMZN-DL\b)/,
+        /(?<amazon>\bAMZN\b)/,
         /(?<comedy_central>\bCC\b)/,
         /(?<crunchy_roll>\bCR\b)/,
         /(?<disney>\bDSNP\b)/,
@@ -53,7 +53,7 @@
         /(?<tv_asahi>\bTV Asahi\b)/,
         /(?<tokyo_tv>\bTokyo TV\b)/,
       ],
-      
+
     //Resolutions
       resolution:[
         /(HD\s?)?(?<_1080p>1080[Pp])(\s?HD)?/,

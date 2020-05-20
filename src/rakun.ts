@@ -1,7 +1,7 @@
 //Imports
   import * as regexs from "./regexs/_"
 
-/** 
+/**
  * Anime Torrent Name Parser.
  */
   export default abstract class Parser {
@@ -127,7 +127,7 @@
 
         //Post-processing
             let reject = []
-          //Post-processing for season, episode and part 
+          //Post-processing for season, episode and part
             for (let key of ["movie", "season", "episode", "part"]) {
               //Remove leading zeros
                 let value = result[key]
@@ -141,11 +141,11 @@
                           value = Number(b).toString()
                           reject.push(a)
                         }
-                        else 
+                        else
                           value = [a, b].map(Number).join("-")
                     }
-                  //Detect single 
-                    else if (regex.processors.post.serie.single.test(value)) 
+                  //Detect single
+                    else if (regex.processors.post.serie.single.test(value))
                       value = Number(value).toString()
                   console.debug(`${key} > post-process > current value = ${value}`)
                   result[key] = value
@@ -168,7 +168,7 @@
                 let value = [...`${result.name} ${reject.join(" ")}`].reverse().map(c => { return ({"[":"]", "]":"["} as loose)[c]||c }).join("").trim()
               //Remove unparsable attributes
                 while (regex.cleaners.special.unparsable.test(value)) {
-                  //Edge case : title is in brackets 
+                  //Edge case : title is in brackets
                     if (regex.cleaners.special.only_brackets.test(value)) {
                       console.debug(`name > post-process > last attribute, assuming it is name`)
                       value = value.match(regex.cleaners.special.only_brackets)?.groups?.name as string
@@ -182,7 +182,7 @@
                   //Remove unparsable brackets
                     else
                       console.debug(`name > post-process > found unparsable value ${value.match(regex.cleaners.special.unparsable)?.groups?.unparsable}`)
-                    value = this.clean({value, removes:[regex.cleaners.special.unparsable], empty:{parenthesis:false}})   
+                    value = this.clean({value, removes:[regex.cleaners.special.unparsable], empty:{parenthesis:false}})
                 }
               //Re-reverse string
                 value = [...value].reverse().join("")
@@ -192,13 +192,13 @@
                     if (((!result.audio)||(!result.audio.includes("multi")))&&(regex.processors.post.audio.possible_multi_audio.test(value))) {
                       result.audio = [...new Set([...(result.audio||"").split(" "), "multi"].sort())].join(" ")
                       console.debug(`audio > post-process > current value = ${result.audio}`)
-                      value = this.clean({value, removes:[regex.processors.post.audio.possible_multi_audio]})   
+                      value = this.clean({value, removes:[regex.processors.post.audio.possible_multi_audio]})
                     }
                   //If episode is not definned, we may be able to find it
                     if ((!result.episode)&&(regex.processors.post.serie.possible_episode.test(value))) {
                       result.episode = value.match(regex.processors.post.serie.possible_episode)?.groups?.episode
                       console.debug(`episode > post-process > current value = ${result.episode}`)
-                      value = this.clean({value, removes:[regex.processors.post.serie.possible_episode]})   
+                      value = this.clean({value, removes:[regex.processors.post.serie.possible_episode]})
                     }
                 }
               //Replace special characters with spaces if needed
@@ -220,7 +220,7 @@
                   delete result[key]
               }
           }
-        
+
         return result as TorrentInfos
       }
 

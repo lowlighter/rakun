@@ -1,4 +1,4 @@
-/** 
+/**
  * Cleaners regexs
  */
   export default Object.freeze({

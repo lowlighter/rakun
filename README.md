@@ -35,17 +35,17 @@ console.log(rakun.parse("[Team246] Ghost in the shell Stand alone complex S01 E1
 #### 📊 What's rakun performances ?
 
 We try to gather a lot of different torrents name format from all over the net to make **rakun** more efficient and reliable.
-You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is currently supported. 
+You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is currently supported.
 
 Below is an excerpt of tests cases which may help you to check **rakun**'s capabilities :
 ```
-- [Leopard-Raws] Shingeki no Kyojin Season 3 Part.2 - 09 END RAW (NHKG 1280x720 x264 AAC).mp4 
-- [Team246] Ghost in the shell Stand alone complex S01 E10-E15 [BDREMUX 1080P MULTi DTSHDMA 5.1][VOSTFR] 
+- [Leopard-Raws] Shingeki no Kyojin Season 3 Part.2 - 09 END RAW (NHKG 1280x720 x264 AAC).mp4
+- [Team246] Ghost in the shell Stand alone complex S01 E10-E15 [BDREMUX 1080P MULTi DTSHDMA 5.1][VOSTFR]
 - [U3-Web] PSYCHO-PASS 3 - FIRST INSPECTOR (2020) [Movie][AMZN WEB-DL(v) 1080p AVC AAC DDP SRT][Multi-Subs] (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)
 - [Kaerizaki-Fansub]_One-Piece_Stampede_Film_14_[VERSION-LIGHT][VOSTFR][BLU-RAY][FHD_1920x1080].mp4
-- Serial Experiments Lain (1998) 1080p.H264.Ac3.Ita.Flac.Jap.Eng.Sub.Ita.Eng [v2] [21GB] [stress] 
+- Serial Experiments Lain (1998) 1080p.H264.Ac3.Ita.Flac.Jap.Eng.Sub.Ita.Eng [v2] [21GB] [stress]
 - [T.H.X&A.I.R.nesSub][Shinsekai_Yori][BDRIP][Vol.1-9全][1920x1080_10bpp][AVC_FLAC][MKV]
-- [BDRip1080p.x264.AC3.ITA.ENG.JAP.].Fullmetal.Alchemist.Brotherhood + OAV Bluray RIP 
+- [BDRip1080p.x264.AC3.ITA.ENG.JAP.].Fullmetal.Alchemist.Brotherhood + OAV Bluray RIP
 - [AnimeRG] Spirited Away (2001) (Sen to Chihiro no Kamikakushi) [720p BD 10bit] [Dual Audio] [Multi-Language Subtitles] [JRR] [Studio Ghibli].mkv
 - Death Note 1-37 [480p] [EN SUB]
 - Dragon.Ball.Z.Movie.14.Battle.of.Gods.2013.EXTENDED.DUAL.AUDiO.SUB.PL.1080p.BluRay.REMUX.AVC.TrueHD.5.1-SeBoLeX
@@ -101,14 +101,14 @@ Multiple values properties (codecs, audio, subtitles, etc.) are sorted to keep c
 
 #### 🧬 ATNP's logic
 
-Parsing follows the following workflow : 
+Parsing follows the following workflow :
   - An input `filename` is given
   - A loop iterates through the [collection of regexs](https://github.com/lowlighter/rakun/tree/master/src/regexs) to extract informations from given `filename`
   - At each iteration, extracted informations are removed from `filename` and [cleaners](https://github.com/lowlighter/rakun/blob/master/src/regexs/cleaners.ts) are applied to remove remnants
   - At the end of the loop, post-processors may be run for specific properties
-  - Unmatched string in `filename` is considered as the cleaned title 
+  - Unmatched string in `filename` is considered as the cleaned title
   - Extracted informations are returned
-  
+
 The main loop order is important, as it tries to match first what can be accurately extracted and removed early (like hash, extension, website, etc.) to ease the remaining extraction, while closely related informations (like season, parts and episode) may not be cleaned instantly to refine successive extraction.
 
 While the aim is to reach 100% accuracy, note that this objective is impossible since there are too much outliers in naming conventions.
@@ -127,7 +127,7 @@ Want to contribute ? Sugoï ! Here what you can help with :
   - Add new features for [rakun](https://github.com/lowlighter/rakun/tree/master/src)
   - Complete [regexs collection](https://github.com/lowlighter/rakun/tree/master/src/regexs)
   - Define new [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases)
-  
+
 #### Open an issue to
   - Reports bugs or unsupported format that should be
   - Ask help

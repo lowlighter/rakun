@@ -1,4 +1,4 @@
-/** 
+/**
  * Torrent metadata related regexs
  */
   export default Object.freeze({

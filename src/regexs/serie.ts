@@ -1,4 +1,4 @@
-/** 
+/**
  * Serie related regexs
  */
   export default Object.freeze({
