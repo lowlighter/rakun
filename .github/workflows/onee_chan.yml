@@ -7,41 +7,39 @@ on:
     branches: [ master ]
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
-    steps:
-      - name: Checkout on branch
-        uses: actions/checkout@v2
-      - name: Setup NodeJS ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: Clean install of dependencies
-        run: npm ci
   build:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Build
-        run: npm run build
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npm run build
   test:
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - name: Apply tests
-        run: npm run test --loglevel=silent
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test --loglevel=silent
     env:
       BADGES_TOKEN: ${{ secrets.BADGES_TOKEN }}
   publish:
-    needs: test
+    needs: [build, test]
     runs-on: ubuntu-latest
     steps:
-      - name: Setup registry token
-        run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc
-      - name: Publish package on version change
-        run: npm run publish-if-possible
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npm run build
+      - run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc
+      - run: npm run publish-if-possible
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
