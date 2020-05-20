@@ -44,5 +44,8 @@
   "bugs": {
     "url": "https://github.com/lowlighter/rakun/issues"
   },
-  "homepage": "https://github.com/lowlighter/rakun#readme"
+  "homepage": "https://github.com/lowlighter/rakun#readme",
+  "engines" : {
+    "node" : ">=14.0.0"
+  }
 }
