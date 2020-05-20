@@ -1,20 +1,21 @@
 # 🦝 Rakun - An Anime torrent name parser
 
 ![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg) ![Tests passed](https://badges.lecoq.io/rakun.tests)
+![](https://img.shields.io/codacy/grade/114dbe0608b14b6a8e92163a6dffc9b4/master?labelColor=2F3338&link=https://app.codacy.com/manual/simon.lecoq/rakun)
 
 A parser to extract informations and metadata from anime torrents filename.
 With this, it'll be easier to script anime torrents related stuff !
 
 ## 💻 Usage
 
-#### ⏪ With the following code...
+### ⏪ With the following code...
 
 ```typescript
 import rakun from "rakun"
 console.log(rakun.parse("[Team246] Ghost in the shell Stand alone complex S01 E10-E15 [BDREMUX 1080P MULTi DTSHDMA 5.1][VOSTFR]"))
 ```
 
-#### ⏩ You'll get the following output :
+### ⏩ You'll get the following output :
 
 ```typescript
 {
@@ -32,13 +33,13 @@ console.log(rakun.parse("[Team246] Ghost in the shell Stand alone complex S01 E1
 }
 ```
 
-#### 📊 What's rakun performances ?
+### 📊 What's rakun performances ?
 
 We try to gather a lot of different torrents name format from all over the net to make **rakun** more efficient and reliable.
 You can check [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases) to see what kind of formatting is currently supported.
 
 Below is an excerpt of tests cases which may help you to check **rakun**'s capabilities :
-```
+```text
 - [Leopard-Raws] Shingeki no Kyojin Season 3 Part.2 - 09 END RAW (NHKG 1280x720 x264 AAC).mp4
 - [Team246] Ghost in the shell Stand alone complex S01 E10-E15 [BDREMUX 1080P MULTi DTSHDMA 5.1][VOSTFR]
 - [U3-Web] PSYCHO-PASS 3 - FIRST INSPECTOR (2020) [Movie][AMZN WEB-DL(v) 1080p AVC AAC DDP SRT][Multi-Subs] (PSYCHO-PASS サイコパス / 心靈判官 / 心理測量者)
@@ -50,9 +51,12 @@ Below is an excerpt of tests cases which may help you to check **rakun**'s capab
 - Death Note 1-37 [480p] [EN SUB]
 - Dragon.Ball.Z.Movie.14.Battle.of.Gods.2013.EXTENDED.DUAL.AUDiO.SUB.PL.1080p.BluRay.REMUX.AVC.TrueHD.5.1-SeBoLeX
 - [Erai-raws] Berserk 2017 - 12 [v2][END][720p][Multiple Subtitle][10A073DC].mkv
+- [BDMV] Made in Abyss / メイドインアビス [BD-BOX I+II][JP]
+- Naruto.SD.Rock.Lee.no.Seishun.Full-Power.Ninden.S01.FRENCH.DVDRiP.x264-Kazelle
+- Evangelion 1.11 You Are (Not) Alone 2007 Multi 1080p Blu-ray Remux AVC DTS-HD MA 6.1 VFF 5.1 H264 [Team246]
 ```
 
-#### 📑 Extracted informations
+### 📑 Extracted informations
 
 Below is the descriptor of the possible extreacted torrent informations.
 Multiple values properties (codecs, audio, subtitles, etc.) are sorted to keep consistancy.
@@ -99,31 +103,48 @@ Multiple values properties (codecs, audio, subtitles, etc.) are sorted to keep c
 
 ## 🔧 Under the hood
 
-#### 🧬 ATNP's logic
+### 🧬 ATNP's logic
 
 Parsing follows the following workflow :
-  - An input `filename` is given
-  - A loop iterates through the [collection of regexs](https://github.com/lowlighter/rakun/tree/master/src/regexs) to extract informations from given `filename`
-  - At each iteration, extracted informations are removed from `filename` and [cleaners](https://github.com/lowlighter/rakun/blob/master/src/regexs/cleaners.ts) are applied to remove remnants
-  - At the end of the loop, post-processors may be run for specific properties
-  - Unmatched string in `filename` is considered as the cleaned title
-  - Extracted informations are returned
+* An input `filename` is given, with possible parser `options`
+* Pre-processors are executed
+* Main processor iterates through the [collection of regexs](https://github.com/lowlighter/rakun/tree/master/src/regexs) to extract informations from `filename`
+  * At each iteration, extracted informations can be either removed from `filename` through [cleaners](https://github.com/lowlighter/rakun/blob/master/src/regexs/cleaners.ts) are applied to remove remnants, or keept for next iteration for closely related informations (like season, parts and episode)
+* Post-processors are executed
+* The remaining part of `filename` is considered as the cleaned title
+* Extracted informations are returned
 
-The main loop order is important, as it tries to match first what can be accurately extracted and removed early (like hash, extension, website, etc.) to ease the remaining extraction, while closely related informations (like season, parts and episode) may not be cleaned instantly to refine successive extraction.
+#### 📰 Additional informations
 
-While the aim is to reach 100% accuracy, note that this objective is impossible since there are too much outliers in naming conventions.
+Regexs are ordered to match first what can be accurately extracted and removed early (like hash, extension, website, etc.) to ease the remaining extraction.
 
-#### 🏅 Code quality
+Except for cleaners and specials regexs, they should have named capture groups. (if capture group are needed). It allows easier understanding of regexs, but it is also the way that the parser register data. 
+
+The main processor is a list of descriptors with the following properties :
+```typescript
+{
+  key?:string,                      // Property to set (e.g. audio, episode, meta, etc..)
+  collection?:RegExp[],             // Regex collection to use
+  get?:"key"|"value",               // If "key", will return capture group's name ; if "value", will return capture group's value
+  mode?:"append"|"replace"|"skip",  // If "append", add value (or create) to property ; if "replace", replace property ; if "skip", skip if property already defined
+  clean?:boolean,                   // If true, cleaners will be applied at the end of the iteration
+  cleaners?:RegExp[]                // Additional cleaners to apply
+}
+```
+
+While the aim is to reach 100% accuracy, note that this objective is nearly impossible since there are too much outliers in naming conventions across various websites.
+
+### 🏅 Code quality
 
 To ensure a quality library, code is required to pass **Onee-chan**'s judgement and fulfill a parsing accuracy of at least **85%** of defined [test cases](https://github.com/lowlighter/rakun/tree/master/tests/cases).
 
 Pull requests may not be merged if they do not reach this standard, unless they are adding revelant tests which may reveal missed matches in current builds. Although edges cases should be integrated to challenge **rakun**, simpler cases should also be added to not biases **Onee-chan**'s evaluation.
 
-#### 💪 Contributing
+### 💪 Contributing
 
 Want to contribute ? Sugoï ! Here what you can help with :
 
-##### Open a pull request to
+#### Open a pull request to
   - Add new features for [rakun](https://github.com/lowlighter/rakun/tree/master/src)
   - Complete [regexs collection](https://github.com/lowlighter/rakun/tree/master/src/regexs)
   - Define new [tests cases](https://github.com/lowlighter/rakun/tree/master/tests/cases)
@@ -132,7 +153,7 @@ Want to contribute ? Sugoï ! Here what you can help with :
   - Reports bugs or unsupported format that should be
   - Ask help
 
-#### 🧾 License
+### 🧾 License
 
 **rakun** is licensed under the [MIT License](https://github.com/lowlighter/rakun/blob/master/LICENSE).
 
