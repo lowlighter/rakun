@@ -28,17 +28,19 @@
         /\bNHKG\b/,
         /\b(?<size>\d+GB)\b/,
       ],
+
     //Special cleaners
       special:{
-        //Unparsable elements, stating from end
-          unparsable:/(?<unparsable>\[[^[]+?\])/,
-        //Only brackets, and title not yet found => title is also in brackets
-          only_brackets:/^\[(?<name>[^[]+)\]$/,
         //Empty elements
           empty:{
             parenthesis:[
               /\(\s*\)/g,
             ]
           },
-      }
+        //Only brackets, and title not yet found => title is also in brackets
+          only_brackets:/^\[(?<name>[^[]+)\]$/,
+        //Unparsable elements, stating from end
+          unparsable:/(?<unparsable>\[[^[]+?\])/,
+      },
+
   })

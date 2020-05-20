@@ -2,6 +2,7 @@
   import * as Regexs from "./regexs/_"
 
 /**
+ * Rakun
  * Anime Torrent Name Parser.
  */
   export default abstract class Parser {
@@ -18,8 +19,8 @@
         //Groups results and regexs
           return {
             length:matches.length,
-            results:matches.map(({match}) => [...Object.entries(match)].filter(([key, value]) => value).map(([key, value]) => get === "key" ? key.replace(/^_/, "") : value)),
             regexs:matches.map(({regex}) => regex),
+            results:matches.map(({match}) => [...Object.entries(match)].filter(([key, val]) => val).map(([key, val]) => get === "key" ? key.replace(/^_/, "") : val)),
           }
       }
 
@@ -34,7 +35,7 @@
       }
 
     /** Parse filename. */
-      static parse(filename:string, options:parser_options = {}) {
+      public static parse(filename:string, options:parser_options = {}) {
         //Preparation
           const regexs = Parser.regexs
           const data = {result:{filename:filename.trim()}, cleaned:filename.trim(), removes:[], rejects:[], regexs, options} as parser_data
@@ -79,6 +80,7 @@
         return data.result as TorrentInfos
       }
 
+    /** Processors. */
       private static readonly process = Object.freeze({
         //Pre-processors
           pre:{
@@ -203,7 +205,7 @@
                 //Initialization
                   const {result, rejects, regexs} = data
                 //Reverse string (used to make regex starts from end instead of start)
-                  let value = [...`${result.name} ${rejects.join(" ")}`].reverse().map(c => { return ({"[":"]", "]":"["} as loose)[c]||c }).join("").trim()
+                  let value = [...`${result.name} ${rejects.join(" ")}`].reverse().map(c => ({"[":"]", "]":"["} as loose)[c]||c).join("").trim()
                 //Remove unparsable attributes
                   while (regexs.cleaners.special.unparsable.test(value)) {
                     //Edge case : title is in brackets

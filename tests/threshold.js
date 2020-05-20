@@ -1,5 +1,5 @@
 //Dependancies
-  const fs = require("fs")
+  const fs = require("fs").promises
   const path = require("path")
   const colors = require("colors")
   const axios = require("axios")
@@ -12,7 +12,7 @@
 //Process
 ;(async function () {
   //Parse results
-    const results = JSON.parse(fs.readFileSync(path.join(__dirname, "results.json")))
+    const results = JSON.parse(await fs.readFile(path.join(__dirname, "results.json")))
 
   //Compute threshold and success rate
     const threshold = Number(argv.threshold.replace("%", ""))||0

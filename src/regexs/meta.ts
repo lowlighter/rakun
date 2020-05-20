@@ -3,16 +3,6 @@
  */
   export default Object.freeze({
 
-    //Subber, translation groups
-      subber:[
-        //Brackets with normal phrasing, and no specials characters is probably subber name
-          /\[(?<subber>[A-Za-z][-A-Za-z&! 0-9.]{5,})\]/,
-        //Subber is usually at start of filename
-          /^\[(?<subber>[-A-Za-z&! 0-9.]+)\]/,
-        //Subber at end of filename
-          /(?<!\d)\s?-\s?(?<subber>[A-Za-z][A-Za-z&!0-9.]+)$/,
-      ],
-
     //Metadata
       data:[
         /(?<remux>\bREMUX(?:ES)?\b)/,
@@ -30,6 +20,16 @@
         /(?<high_quality>\bHQ\b)/,
         /[+]\s?(?<has_ovas>OVAs?)/,
         /[+]\s?(?<has_specials>Specials?)/,
+      ],
+
+    //Subber, translation groups
+      subber:[
+        //Brackets with normal phrasing, and no specials characters is probably subber name
+          /\[(?<subber>[A-Za-z][-A-Za-z&! 0-9.]{5,})\]/,
+        //Subber is usually at start of filename
+          /^\[(?<subber>[-A-Za-z&! 0-9.]+)\]/,
+        //Subber at end of filename
+          /(?<!\d)\s?-\s?(?<subber>[A-Za-z][A-Za-z&!0-9.]+)$/,
       ],
 
     //Website

@@ -3,46 +3,6 @@
  */
   export default Object.freeze({
 
-    //Movie
-      movie:[
-        /(?<=[Mm]ovie\s)(?<movie>\d+)/,
-      ],
-
-    //Season
-      season:{
-        range: {
-          extract:[
-            /\b[\(\[)]?[Ss]easons? (?<a>\d+)\s?[-~&]\s?(?<b>\d+)[\)\]]?\b/,
-          ],
-          keep:[],
-        },
-        single:{
-          extract:[
-            /\b(?<season>2)nd [Ss]eason\b/,
-            /\b(?<season>3)rd [Ss]eason\b/,
-            /\b[\(\[)]?[Ss]eason (?<season>\d+)[\)\]]?\b/,
-            /\b[\(\[)]?[Ss]aison (?<season>\d+)[\)\]]?\b/,
-            /[-._ ]S(?<season>\d+)(?=E\d)/,
-            /\bS(?<season>\d+)\b/,
-          ],
-          keep:[],
-        }
-      },
-
-    //Part
-      part:{
-        range: {
-          extract:[],
-          keep:[],
-        },
-        single:{
-          extract:[
-            /\b[Pp]art[-._ ](?<part>\d)\b/,
-          ],
-          keep:[],
-        }
-      },
-
     //Episode
       episode:{
         //Episodes ranges
@@ -70,6 +30,46 @@
               /- \b(?<episode>\d+)(?= |$)\b/,
             ],
           },
+      },
+
+    //Movie
+      movie:[
+        /(?<=[Mm]ovie\s)(?<movie>\d+)/,
+      ],
+
+    //Part
+      part:{
+        range: {
+          extract:[],
+          keep:[],
+        },
+        single:{
+          extract:[
+            /\b[Pp]art[-._ ](?<part>\d)\b/,
+          ],
+          keep:[],
+        }
+      },
+
+    //Season
+      season:{
+        range: {
+          extract:[
+            /\b[\(\[)]?[Ss]easons? (?<a>\d+)\s?[-~&]\s?(?<b>\d+)[\)\]]?\b/,
+          ],
+          keep:[],
+        },
+        single:{
+          extract:[
+            /\b(?<season>2)nd [Ss]eason\b/,
+            /\b(?<season>3)rd [Ss]eason\b/,
+            /\b[\(\[)]?[Ss]eason (?<season>\d+)[\)\]]?\b/,
+            /\b[\(\[)]?[Ss]aison (?<season>\d+)[\)\]]?\b/,
+            /[-._ ]S(?<season>\d+)(?=E\d)/,
+            /\bS(?<season>\d+)\b/,
+          ],
+          keep:[],
+        }
       },
 
   })
