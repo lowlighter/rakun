@@ -1,5 +1,5 @@
-// For a detailed explanation regarding each configuration property, visit:
-// https://jestjs.io/docs/en/configuration.html
+//For a detailed explanation regarding each configuration property, visit:
+//https://jestjs.io/docs/en/configuration.html
 
   module.exports = {
 
@@ -13,5 +13,11 @@
       testMatch: [
         "**/tests/cases/**.js",
       ],
+
+    //Collect coverage
+      collectCoverage: true,
+
+    //Coverage directory
+      coverageDirectory: "tests/coverage",
 
   }
