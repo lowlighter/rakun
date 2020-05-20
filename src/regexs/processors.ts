@@ -3,17 +3,6 @@
  */
   export default Object.freeze({
 
-    //Pre-processors
-      pre:{
-        //Name
-          name:{
-            //Asian content cleaner
-              asian_content:[
-                /\[(?<content>[一-龯]+)\]/g,
-              ],
-          },
-      },
-
     //Post-processors
       post:{
         //Audio
@@ -56,6 +45,17 @@
           subber:{
             //Check if attribute may be a possible subber name if none has been detected before
               possible_subber_name:/\[(?<subber>[-A-Za-z&! 0-9.]+)\]/,
+          },
+      },
+
+    //Pre-processors
+      pre:{
+        //Name
+          name:{
+            //Asian content cleaner
+              asian_content:[
+                /\[(?<content>[一-龯]+)\]/g,
+              ],
           },
       },
 

@@ -1,13 +1,13 @@
 //Dependancies
   const fs = require("fs").promises
   const path = require("path")
-  const colors = require("colors")
   const axios = require("axios")
   const git = require("simple-git/promise")(path.join(__dirname, ".."))
   const argv = require("minimist")(process.argv.slice(2), {
     alias:{t:"threshold"},
     default:{threshold:"85%"}
   })
+  require("colors")
 
 //Process
 ;(async function () {

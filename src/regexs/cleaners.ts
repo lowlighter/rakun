@@ -35,7 +35,7 @@
           empty:{
             parenthesis:[
               /\(\s*\)/g,
-            ]
+            ],
           },
         //Only brackets, and title not yet found => title is also in brackets
           only_brackets:/^\[(?<name>[^[]+)\]$/,

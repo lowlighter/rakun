@@ -7,10 +7,14 @@
  */
   export default abstract class Parser {
 
-    /** Regexs. */
+    /**
+     * Regexs.
+     */
       private static readonly regexs = Regexs
 
-    /** Test a collection of regex on a value and return all matching regex with its captured groups. */
+    /**
+     * Test a collection of regex on a value and return all matching regex with its captured groups.
+     */
       private static test({value, collection, get = "key"}:{value:string, collection:RegExp[], get?:"key"|"value"}):{length:number, results:any[][], regexs:RegExp[]} {
         //Evaluate regex from collection and filter matching ones
           const matches = collection
@@ -24,7 +28,9 @@
           }
       }
 
-    /** Clean string with given regex, apply cleaners and trim. */
+    /**
+     * Clean string with given regex, apply cleaners and trim.
+     */
       private static clean({value, removes = [], empty = {}}:{value:string, removes?:RegExp[], empty?:{parenthesis?:boolean}}):string {
         //Preparation
           const {parenthesis = true} = empty
@@ -34,7 +40,9 @@
         return value.trim()
       }
 
-    /** Parse filename. */
+    /**
+     * Parse filename.
+     */
       public static parse(filename:string, options:parser_options = {}) {
         //Preparation
           const regexs = Parser.regexs
@@ -80,23 +88,14 @@
         return data.result as TorrentInfos
       }
 
-    /** Processors. */
+    /**
+     * Processors.
+     */
       private static readonly process = Object.freeze({
-        //Pre-processors
-          pre:{
-            /** Extract and locate asian content */
-              asian_content(data:parser_data) {
-                //Initialization
-                  const {regexs} = data
-                  let {cleaned} = data
-                //Iterate on asian content regexs
-                  for (const regex of regexs.processors.pre.name.asian_content)
-                    cleaned = cleaned.replace(regex, "$<content>")
-                  console.debug(`(meta) > pre-process > cleaned value = ${cleaned}`)
-                data.cleaned = cleaned
-              }
-          },
-        /** Main processors */
+
+        /**
+         * Main processors
+         */
           main(data:parser_data, ...args:{key?:string, collection?:RegExp[], get?:"key"|"value", mode?:"append"|"replace"|"skip", clean?:boolean, cleaners?:RegExp[]}[]) {
             //Initialization
               const {result, removes, options} = data
@@ -155,38 +154,35 @@
             result.name = cleaned
             console.debug(`name > process > current value = ${cleaned}`)
           },
-        //Post-processors
-          post:{
-            /** Post-processing for season, episode and part */
-              serie(data:parser_data) {
+
+        /**
+         * Post-processors.
+         */
+          post:Object.freeze({
+
+            /**
+             * Clean all properties (except filename).
+             */
+              clean(data:parser_data) {
                 //Initialization
-                  const {result, rejects, regexs} = data
-                //Iterate on move, season, episode and part properties
-                  for (const key of ["movie", "season", "episode", "part"]) {
-                    //Remove leading zeros
-                      let value = result[key]
-                      if (value) {
-                        //Detect ranges
-                          if (regexs.processors.post.serie.range.test(value)) {
-                            const [a, b] = value.trim().split(" ")
-                            //If range is not ascending or upper limit has leading zero while lower hasn't, lower limit is probably not part of a range
-                              if ((Number(a) > Number(b))||((regexs.processors.post.serie.leading_zero.test(b))&&(!regexs.processors.post.serie.leading_zero.test(a)))) {
-                                console.debug(`${key} > post-process > invalid range or formatting mistmatch, accepting ${b} but rejecting ${a}`)
-                                value = Number(b).toString()
-                                rejects.push(a)
-                              }
-                              else
-                                value = [a, b].map(Number).join("-")
-                          }
-                        //Detect single
-                          else if (regexs.processors.post.serie.single.test(value))
-                            value = Number(value).toString()
-                        console.debug(`${key} > post-process > current ${key} = ${value}`)
-                        result[key] = value
+                  const {result, removes, options} = data
+                //Clean all properties
+                  for (const [key, value] of Object.entries(result)) {
+                    result[key] = (value === result.filename) ? value : Parser.clean({value, removes})
+                    //Delete property if empty
+                      if (!result[key]) {
+                        console.debug(`${key} > post-process > deleted because empty`)
+                        if (options.nulls)
+                          result[key] = null
+                        else
+                          delete result[key]
                       }
                   }
               },
-            /** Post-processing for codecs */
+
+            /**
+             * Post-processing for codecs.
+             */
               codecs(data:parser_data) {
                 //Initialization
                   const {result, regexs} = data
@@ -200,7 +196,10 @@
                     result.codecs = codecs
                   }
               },
-            /** Post-processing for name */
+
+            /**
+             * Post-processing for name.
+             */
               name(data:parser_data) {
                 //Initialization
                   const {result, rejects, regexs} = data
@@ -247,24 +246,60 @@
                 console.debug(`name > post-process > current value = ${value}`)
                 result.name = value
               },
-            //Clean all properties (except filename)
-              clean(data:parser_data) {
+
+            /**
+             * Post-processing for season, episode and part.
+             */
+              serie(data:parser_data) {
                 //Initialization
-                  const {result, removes, options} = data
-                //Clean all properties
-                  for (const [key, value] of Object.entries(result)) {
-                    result[key] = (value === result.filename) ? value : Parser.clean({value, removes})
-                    //Delete property if empty
-                      if (!result[key]) {
-                        console.debug(`${key} > post-process > deleted because empty`)
-                        if (options.nulls)
-                          result[key] = null
-                        else
-                          delete result[key]
+                  const {result, rejects, regexs} = data
+                //Iterate on move, season, episode and part properties
+                  for (const key of ["movie", "season", "episode", "part"]) {
+                    //Remove leading zeros
+                      let value = result[key]
+                      if (value) {
+                        //Detect ranges
+                          if (regexs.processors.post.serie.range.test(value)) {
+                            const [a, b] = value.trim().split(" ")
+                            //If range is not ascending or upper limit has leading zero while lower hasn't, lower limit is probably not part of a range
+                              if ((Number(a) > Number(b))||((regexs.processors.post.serie.leading_zero.test(b))&&(!regexs.processors.post.serie.leading_zero.test(a)))) {
+                                console.debug(`${key} > post-process > invalid range or formatting mistmatch, accepting ${b} but rejecting ${a}`)
+                                value = Number(b).toString()
+                                rejects.push(a)
+                              }
+                              else
+                                value = [a, b].map(Number).join("-")
+                          }
+                        //Detect single
+                          else if (regexs.processors.post.serie.single.test(value))
+                            value = Number(value).toString()
+                        console.debug(`${key} > post-process > current ${key} = ${value}`)
+                        result[key] = value
                       }
                   }
               },
-          }
+
+          }),
+        /**
+         * Pre-processors.
+         */
+          pre:Object.freeze({
+
+            /**
+             * Extract and locate asian content.
+             */
+              asian_content(data:parser_data) {
+                //Initialization
+                  const {regexs} = data
+                  let {cleaned} = data
+                //Iterate on asian content regexs
+                  for (const regex of regexs.processors.pre.name.asian_content)
+                    cleaned = cleaned.replace(regex, "$<content>")
+                  console.debug(`(meta) > pre-process > cleaned value = ${cleaned}`)
+                data.cleaned = cleaned
+              },
+
+          }),
       })
 
   }
