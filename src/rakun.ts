@@ -63,10 +63,10 @@
             {cleaners:regexs.cleaners.misc},
           )
         //Post-processing
-            this.process.post.serie(data)
-            this.process.post.codecs(data)
-            this.process.post.name(data)
-            this.process.post.clean(data)
+          this.process.post.serie(data)
+          this.process.post.codecs(data)
+          this.process.post.name(data)
+          this.process.post.clean(data)
         return data.result as TorrentInfos
       }
 
