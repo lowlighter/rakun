@@ -13,7 +13,7 @@ jobs:
       matrix:
         node-version: [14.x]
     steps:
-      - name: Checkout on branch 
+      - name: Checkout on branch
         uses: actions/checkout@v2
       - name: Setup NodeJS ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -25,16 +25,12 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Apply linter 
-        uses: stefanoeb/eslint-action@1.0.2
-        with:
-          files: src/ tests/
-      - name: Build 
+      - name: Build
         run: npm run build
   test:
     needs: build
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Apply tests
         run: npm run test --loglevel=silent
     env:
@@ -42,11 +38,10 @@ jobs:
   publish:
     needs: test
     runs-on: ubuntu-latest
-    steps: 
+    steps:
       - name: Setup registry token
-        run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc 
+        run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc
       - name: Publish package on version change
         run: npm run publish-if-possible
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
-      
