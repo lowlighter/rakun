@@ -7,22 +7,45 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm run test --loglevel=silent
-    - run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc 
-    - run: npm run publish-if-possible
+      - name: Checkout on branch 
+        uses: actions/checkout@v2
+      - name: Setup NodeJS ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Clean install of dependencies
+        run: npm ci
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply linter 
+        uses: iCrawl/action-eslint@v1
+      - name: Build 
+        run: npm run build
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Apply tests
+        run: npm run test --loglevel=silent
+    env:
+      BADGES_TOKEN: ${{ secrets.BADGES_TOKEN }}
+      PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Setup registry token
+        run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc 
+      - name: Publish package on version change
+        run: npm run publish-if-possible
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
-      BADGES_TOKEN: ${{ secrets.BADGES_TOKEN }}
+      
