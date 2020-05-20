@@ -1,8 +1,7 @@
 # 🦝 Rakun - An Anime torrent name parser
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/114dbe0608b14b6a8e92163a6dffc9b4)](https://app.codacy.com/manual/simon.lecoq/rakun?utm_source=github.com&utm_medium=referral&utm_content=lowlighter/rakun&utm_campaign=Badge_Grade_Dashboard)
-
 ![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg) ![Tests passed](https://badges.lecoq.io/rakun.tests)
+![](https://img.shields.io/codacy/grade/114dbe0608b14b6a8e92163a6dffc9b4/master?labelColor=2F3338&link=https://app.codacy.com/manual/simon.lecoq/rakun)
 
 A parser to extract informations and metadata from anime torrents filename.
 With this, it'll be easier to script anime torrents related stuff !
