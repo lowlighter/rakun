@@ -1,7 +1,6 @@
 # 🦝 Rakun - An Anime torrent name parser
 
-![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg) ![Tests passed](https://badges.lecoq.io/rakun.tests)
-![Code quality](https://img.shields.io/codacy/grade/114dbe0608b14b6a8e92163a6dffc9b4/master?labelColor=2F3338&link=https://app.codacy.com/manual/simon.lecoq/rakun) ![License](https://img.shields.io/github/license/lowlighter/rakun?labelColor=2F3338) ![Version](https://img.shields.io/github/package-json/v/lowlighter/rakun?labelColor=2F3338)
+![Onee-chan](https://github.com/lowlighter/rakun/workflows/Onee-chan/badge.svg) ![Tests passed](https://badges.lecoq.io/rakun.tests) ![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fbadges.lecoq.io%2Frakun%2Fcoverage) ![Code quality](https://img.shields.io/codacy/grade/114dbe0608b14b6a8e92163a6dffc9b4/master?labelColor=2F3338&link=https://app.codacy.com/manual/simon.lecoq/rakun) ![Version](https://img.shields.io/github/package-json/v/lowlighter/rakun?labelColor=2F3338) ![License](https://img.shields.io/github/license/lowlighter/rakun?labelColor=2F3338)
 
 A parser to extract informations and metadata from anime torrents filename.
 With this, it'll be easier to script anime torrents related stuff !
