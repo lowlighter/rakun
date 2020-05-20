@@ -36,6 +36,28 @@
       readonly episode?:string
   }
 
+/** Parser data. */
+  type parser_data = {
+    //Torrent infos references
+      readonly result:loose
+    //Cleaned string
+      cleaned:string
+    //Regex matchs to removes
+      readonly removes:RegExp[]
+    //Rejected matchs to re-add
+      readonly rejects:string[]
+    //Regexs collections
+      readonly regexs:Parser.regexs
+    //Options
+      readonly options:parser_options
+  }
+
+/** Parser options. */
+  type parser_options = {
+    //Fill unfound properties with null
+      readonly nulls?:boolean
+  }
+
 /** Loose type. */
   type loose = {[key:string]:any}
 
