@@ -28,6 +28,8 @@
           /\[(?<subber>[A-Za-z][-A-Za-z&! 0-9.]{5,})\]/,
         //Subber is usually at start of filename
           /^\[(?<subber>[-A-Za-z&! 0-9.]+)\]/,
+        //Subber at end of filename, with special characters but got "Sub" in its name
+          /\s(?<subber>[A-Za-z][-A-Za-z&!0-9.]+[Ss][Uu][Bb])$/,
         //Subber at end of filename
           /(?<!\d)\s?-\s?(?<subber>[A-Za-z][A-Za-z&!0-9.]+)$/,
       ],

@@ -3,7 +3,7 @@
     "target": "esnext",
     "baseUrl": "./src",
     "rootDir": "./src",
-    "outDir":"./dist",
+    "outDir":"./dist/build",
     "module": "commonjs",
     "strict": true,
     "strictPropertyInitialization": false,
