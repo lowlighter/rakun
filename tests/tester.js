@@ -1,18 +1,23 @@
 //Imports
-  const {default:rakun} = require(require("path").join(__dirname, "..", "dist/rakun"))
+  const {default:rakun} = require(require("path").join(__dirname, "..", "dist/build/rakun"))
+  if (global.single)
+    test.skip("Skipping", () => void(0))
 
 //Exports
   module.exports = function (testable) {
     //Tester
       const tester = () => expect(rakun.parse(testable.filename)).toEqual(testable)
-    //Hide loggers
-      console.debug = () => null
-    //Apply test (only)
-      if (testable.only) {
-        delete testable.only
-        test.only(testable.filename, tester)
+    //Apply test single
+      if (global.single) {
+        if (testable.only) {
+          delete testable.only
+          test.only(testable.filename, tester)
+        }
+        return
       }
+    //Clean tests
+      console.debug = () => null
+      delete testable.only
     //Apply test
-      else
-        test(testable.filename, tester)
+      test(testable.filename, tester)
   }

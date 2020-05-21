@@ -7,10 +7,8 @@
       global:[
         //Multiples spaces (pre)
           /\s{2,}/g,
-        //Special characters (either at start or end)
-          /^[-_./]/, /[-_./]$/,
         //Special characters remnants
-          /[-_.]{2,}/g, /[.]$/,
+          /[-_.]{2,}/g,
         //Spaces after/before brackets
           /(?<=\[)\s/g, /\s(?=\])/g,
         //Spaces after/before parenthesis
@@ -19,6 +17,8 @@
           /(?:^| )[_.] /g,
         //Empty brackets
           /[\[]\s*[\]]/g,
+        //Special characters (either at start or end)
+          /^[-_./]/, /[-_./]$/,
         //Multiples spaces (post)
           /\s{2,}/g,
       ],

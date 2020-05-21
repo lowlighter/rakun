@@ -8,7 +8,7 @@
       name:"Toriko",
       subber:"WZF",
       episode:"93-94",
-      coddecs:"aac x264",
+      codecs:"aac x264",
       resolution:"720p",
       subtitles:"es",
     },
