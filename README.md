@@ -7,6 +7,13 @@ With this, it'll be easier to script anime torrents related stuff !
 
 ## 💻 Usage
 
+### 📦 Installation
+
+You can either use default npm registry (`https://registry.npmjs.org`) or the GitHub package registry (`https://npm.pkg.github.com`).
+```bash
+npm install @lowlighter/rakun --save
+```
+
 ### ⏪ With the following code...
 
 ```typescript
