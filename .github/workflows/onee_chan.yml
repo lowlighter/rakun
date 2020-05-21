@@ -31,6 +31,7 @@ jobs:
       BADGES_TOKEN: ${{ secrets.BADGES_TOKEN }}
   publish:
     needs: [build, test]
+    if: github.event == "push"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
