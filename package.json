@@ -31,14 +31,11 @@
     "test-threshold": "node tests/threshold.js --threshold=85%",
     "test": "npx run-s test-cases test-threshold",
     "build-and-test": "npx run-s clean build test",
-    "publish-if-possible": "npm publish || true"
+    "publish-if-possible": "npm publish --access public || true"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lowlighter/rakun.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "anime",
