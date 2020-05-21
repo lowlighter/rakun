@@ -54,8 +54,7 @@
 
 /** Parser options. */
   type parser_options = {
-    //Fill unfound properties with null
-      readonly nulls?:boolean
+
   }
 
 /** Loose type. */

@@ -7,7 +7,7 @@
       post:{
         //Audio
           audio:{
-            //Maybe it was impossible to determine wether it was multi subs or multi audio, assuming audio if remaining
+            //Maybe it was impossible to determine whether it was multi subs or multi audio, assuming audio if remaining
               possible_multi_audio:/[Mm]ulti$/,
           },
         //Codecs
@@ -29,6 +29,17 @@
                 /(?<=[ A-Za-z0-9一-龯])\.(?=[([A-Za-z一-龯])/g,
                 /(?<=[ A-Za-z一-龯])\.(?=[([A-Za-z0-9一-龯])/g,
               ],
+          },
+        //Resolution post-processors
+          resolution:{
+            //Maybe it was impossible to determine whether it was a resolution or not (these are applied after episode post-processing to avoid confusion with episode number)
+              possible_resolution:[
+                /(?<_1080p>\b1080\b|[-_. ]1080$)/,
+                /(?<_720p>\b720\b|[-_. ]720$)/,
+                /(?<_576p>\b576\b|[-_. ]576$)/,
+                /(?<_544p>\b544\b|[-_. ]544$)/,
+                /(?<_480p>\b480\b|[-_. ]480$)/,
+              ]
           },
         //Serie post-processors
           serie:{

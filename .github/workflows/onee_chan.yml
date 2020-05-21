@@ -40,7 +40,10 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - run: npm run build
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_REGISTRY_TOKEN" > ~/.npmrc
+      - run: npm run publish-if-possible
       - run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc
       - run: npm run publish-if-possible
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
+      NPM_REGISTRY_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}

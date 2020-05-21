@@ -20,7 +20,7 @@
         //Single episode
           single:{
             extract:[
-              /\b(?<episode>\d{2,})\s+END\b/,
+              /(?<episode>\d{2,})\s+END(?: |$)/,
             ],
             keep:[
               /\bS\d+E(?<episode>\d+)\b/,
@@ -56,7 +56,7 @@
       season:{
         range: {
           extract:[
-            /\b[\(\[)]?[Ss]easons? (?<a>\d+)\s?[-~&]\s?(?<b>\d+)[\)\]]?\b/,
+            /\b[\(\[)]?[Ss]easons (?<a>\d+)\s?[-~&]\s?(?<b>\d+)[\)\]]?\b/,
           ],
           keep:[],
         },

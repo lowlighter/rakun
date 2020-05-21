@@ -6,9 +6,9 @@
     //Extension
       extension:[
         /(?<mkv>[.]mkv$)/,
-        /(?<mkv>\bMKV\b)/,
+        /(?<mkv>MKV)/,
         /(?<mp4>[.]mp4$)/,
-        /(?<mp4>\bMP4\b)/,
+        /(?<mp4>MP4)/,
         /(?<_7z>[.]7z$)/,
       ],
 

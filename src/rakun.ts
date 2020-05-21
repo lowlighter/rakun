@@ -15,16 +15,16 @@
     /**
      * Test a collection of regex on a value and return all matching regex with its captured groups.
      */
-      private static test({value, collection, get = "key"}:{value:string, collection:RegExp[], get?:"key"|"value"}):{length:number, results:any[][], regexs:RegExp[]} {
+      private static test({value, collection, get = "key"}:{value:string, collection:RegExp[], get?:"key"|"value"}):{length:number, matches:any[][], regexs:RegExp[]} {
         //Evaluate regex from collection and filter matching ones
           const matches = collection
             .map(regex => regex.test(value) ? {match:value.match(regex)?.groups, regex} : null)
             .filter((match):match is  {match:loose, regex:RegExp} => !!match)
-        //Groups results and regexs
+        //Groups matches and regexs
           return {
             length:matches.length,
             regexs:matches.map(({regex}) => regex),
-            results:matches.map(({match}) => [...Object.entries(match)].filter(([key, val]) => val).map(([key, val]) => get === "key" ? key.replace(/^_/, "") : val)),
+            matches:matches.map(({match}) => [...Object.entries(match)].filter(([key, val]) => val).map(([key, val]) => get === "key" ? key.replace(/^_/, "") : val)),
           }
       }
 
@@ -83,6 +83,7 @@
         //Post-processing
           this.process.post.serie(data)
           this.process.post.codecs(data)
+          this.process.post.resolution(data)
           this.process.post.name(data)
           this.process.post.clean(data)
         return data.result as TorrentInfos
@@ -115,11 +116,11 @@
                           console.debug(`${key} > process > mode ${mode}`)
                           switch (mode) {
                             case "append":{
-                              result[key] = [...new Set([...previous.split(" "), ...matches.results.flat()].sort())].join(" ")
+                              result[key] = [...new Set([...previous.split(" "), ...matches.matches.flat()].sort())].join(" ")
                               break
                             }
                             case "replace":{
-                              result[key] = [...new Set(matches.results.flat())].join(" ")
+                              result[key] = [...new Set(matches.matches.flat())].join(" ")
                               break
                             }
                             case "skip":{
@@ -127,7 +128,7 @@
                                 console.debug(`${key} > process > mode skip > value already defined, skipping`)
                                 continue
                               }
-                              result[key] = matches.results[0].join(" ")
+                              result[key] = matches.matches[0].join(" ")
                               break
                             }
                           }
@@ -136,12 +137,10 @@
                         //Put matching regex in queue for removal
                           removes.push(...matches.regexs)
                       }
-                    //Fill with null if no match and option is enabled
-                      else {
+                    //No matches
+                      else
                         console.debug(`${key} > process > no matches`)
-                        if (options.nulls)
-                          result[key] = null
-                      }
+
                   }
                 //Clean if needed
                   if (clean) {
@@ -168,14 +167,12 @@
                   const {result, removes, options} = data
                 //Clean all properties
                   for (const [key, value] of Object.entries(result)) {
-                    result[key] = (value === result.filename) ? value : Parser.clean({value, removes})
+                    //Clean
+                      result[key] = (value === result.filename) ? value : Parser.clean({value, removes})
                     //Delete property if empty
                       if (!result[key]) {
                         console.debug(`${key} > post-process > deleted because empty`)
-                        if (options.nulls)
-                          result[key] = null
-                        else
-                          delete result[key]
+                        delete result[key]
                       }
                   }
               },
@@ -245,6 +242,32 @@
                     value = value.replace(regex, " ")
                 console.debug(`name > post-process > current value = ${value}`)
                 result.name = value
+              },
+
+            /**
+             * Post-processing for resolution.
+             */
+              resolution(data:parser_data) {
+                //Initialization
+                  const {result, regexs} = data
+                  let {name, resolution} = result
+                //Check if resolution does not exist
+                  if (!resolution) {
+                    //If resolution has not been found, maybe one of the number is actually a resolution value
+                      const matches = Parser.test({collection:regexs.processors.post.resolution.possible_resolution, value:name})
+                      if (matches.length) {
+                        //Extract match
+                          const match = matches.matches[0].join(" ")
+                          const regex = matches.regexs[0]
+                          resolution = match
+                        //Clean
+                          result.name = Parser.clean({value:name, removes:[regex]})
+                        //Update resolution
+                          console.debug(`resolution > post-process > found remamining number which may be resolution (${match})`)
+                          console.debug(`resolution > post-process > current resolution = ${resolution}`)
+                          result.resolution = resolution
+                      }
+                  }
               },
 
             /**
