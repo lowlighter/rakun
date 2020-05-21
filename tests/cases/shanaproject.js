@@ -34,7 +34,7 @@
       name:"Dragon Ball Super - Broly",
       source:"bluray",
       resolution:"1080p",
-      codecs:"avc true_hd",
+      codecs:"avc true_hd yuv444p10",
       extension:"mkv",
     },
     {

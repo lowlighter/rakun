@@ -1,7 +1,7 @@
 /**
  * Serie related regexs
  */
-  export default Object.freeze({
+  export default {
 
     //Episode
       episode:{
@@ -21,6 +21,7 @@
           single:{
             extract:[
               /(?<episode>\d{2,})\s+END(?: |$)/,
+              /#(?<episode>\d+)(?: |$)/,
             ],
             keep:[
               /\bS\d+E(?<episode>\d+)\b/,
@@ -34,9 +35,20 @@
       },
 
     //Movie
-      movie:[
-        /(?<=[Mm]ovie\s)(?<movie>\d+)/,
-      ],
+      movie:{
+        range:{
+          extract:[
+            /[Mm]ovies?\s(?<a>\d+)\s?[-~&]\s?(?<b>\d+)/,
+          ],
+          keep:[],
+        },
+        single:{
+          extract:[
+            /(?<=[Mm]ovie\s)(?<movie>\d+)/,
+          ],
+          keep:[]
+        }
+      },
 
     //Part
       part:{
@@ -73,4 +85,4 @@
         },
       },
 
-  })
+  }

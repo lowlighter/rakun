@@ -1,7 +1,7 @@
 /**
  * File metadata related regexs
  */
-  export default Object.freeze({
+  export default {
 
     //Extension
       extension:[
@@ -17,4 +17,4 @@
         /[\[\()](?<hash>[A-F0-9]{8})[\]\)]/,
       ],
 
-  })
+  }

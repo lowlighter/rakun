@@ -64,7 +64,10 @@
             {key:"subtitles", collection:regexs.lang.subtitles.extract},
             {key:"subtitles", collection:regexs.lang.subtitles.keep, clean:false},
             {key:"subber", collection:regexs.meta.subber, get:"value", mode:"skip"},
-            {key:"movie", collection:regexs.serie.movie, get:"value", mode:"skip"},
+            {key:"movie", collection:regexs.serie.movie.range.extract, get:"value"},
+            {key:"movie", collection:regexs.serie.movie.single.extract, get:"value"},
+            {key:"movie", collection:regexs.serie.movie.range.keep, get:"value", mode:"skip"},
+            {key:"movie", collection:regexs.serie.movie.single.keep, get:"value", mode:"skip"},
             {key:"part", collection:regexs.serie.part.range.extract, get:"value"},
             {key:"part", collection:regexs.serie.part.single.extract, get:"value"},
             {key:"part", collection:regexs.serie.part.range.keep, get:"value", mode:"skip"},
@@ -187,8 +190,12 @@
                 //Check if codecs exists
                   if (codecs) {
                     //If codecs includes both DTS and DTS HDMA, only keep latter version
-                      if (regexs.processors.post.codecs.dts_hdma_duplicates.test(codecs))
-                        codecs = codecs.replace(regexs.processors.post.codecs.dts_hdma_duplicates, "dts_hdma")
+                      for (const [duplicates, kept] of regexs.processors.post.codecs.duplicates) {
+                        if (duplicates.map((regex:RegExp) => regex.test(codecs)).filter((match:boolean) => match).length === duplicates.length) {
+                          codecs = [...Parser.clean({value:codecs, removes:duplicates}).split(" "), kept].sort().join(" ")
+                          console.debug(`codecs > post-process > found duplicate codecs for ${kept}`)
+                        }
+                      }
                     console.debug(`codecs > post-process > current codecs = ${codecs}`)
                     result.codecs = codecs
                   }

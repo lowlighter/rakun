@@ -25,7 +25,7 @@
       name:"Made in Abyss",
       episode:"1-13",
       resolution:"1080p",
-      codecs:"ac3 avc",
+      codecs:"avc eac3 yuv444p10",
       subtitles:"multi",
     },
     {
@@ -107,7 +107,7 @@
       name:"Saint Seiya",
       episode:"39",
       hash:"D92CCED0",
-      resolution:"720p",
+      resolution:"16_9",
       distributor:"tokyo_tv",
       codecs:"lpcm"
     },

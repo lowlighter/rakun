@@ -47,7 +47,7 @@
     //Rejected matchs to re-add
       readonly rejects:string[]
     //Regexs collections
-      readonly regexs:Parser.regexs
+      readonly regexs:Regexs
     //Options
       readonly options:parser_options
   }

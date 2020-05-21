@@ -1,7 +1,7 @@
 /**
  * Language related regexs
  */
-  export default Object.freeze({
+  export default {
 
     //Audio
       audio:{
@@ -51,4 +51,4 @@
         keep:[],
       },
 
-  })
+  }

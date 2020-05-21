@@ -1,7 +1,7 @@
 /**
  * Processors regexs
  */
-  export default Object.freeze({
+  export default {
 
     //Post-processors
       post:{
@@ -13,7 +13,10 @@
         //Codecs
           codecs:{
             //Detect multiple DTS version
-              dts_hdma_duplicates:/\bdts\b.*\bdts_hdma\b/,
+              duplicates:[
+                [[/\bdts\b/, /\bdts_hdma\b/], "dts_hdma"],
+                [[/\bac3\b/, /\beac3\b/], "eac3"],
+              ]
           },
         //Name
           name:{
@@ -70,4 +73,4 @@
           },
       },
 
-  })
+  }

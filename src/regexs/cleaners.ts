@@ -1,7 +1,7 @@
 /**
  * Cleaners regexs
  */
-  export default Object.freeze({
+  export default {
 
     //Global cleaners (always executed at cleaning)
       global:[
@@ -43,4 +43,4 @@
           unparsable:/(?<unparsable>\[[^[]+?\])/,
       },
 
-  })
+  }

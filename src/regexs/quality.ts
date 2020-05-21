@@ -1,7 +1,7 @@
 /**
  * Quality related regexs (sources, resolution, codecs, etc.)
  */
-  export default Object.freeze({
+  export default {
 
     //Codecs
       codecs:[
@@ -10,11 +10,15 @@
         /(?<x265>[Xx]265)/,
         /(?<x265>[(\[-_. ][Xx]265[)\]-_. ])/,
         /(?<h265>[Hh]265)/,
+        /(?<hi444pp>Hi444PP)/,
         /(?<xvidhd>XVIDHD)/,
         /(?<divx>divx)/,
+        /(?<eac3>E-?AC-?3)/,
         /(?<aac>AAC)/,
         /(?<ac3>[Aa]c3|AC3)/,
+        /(?<yuv444p10>YUV444P10)/,
         /(?<av1>AV1)/,
+        /(?<flac>FLAC(?:x2)?)/,
         /[-_. ]?(?<flac>FLAC)[-_. ]?/,
         /(?<flac>Flac)/,
         /(?<_10bit>10-?[Bb]its?)/,
@@ -53,6 +57,7 @@
         /(?<bs11>\bBS11\b)/,
         /(?<tv_asahi>\bTV Asahi\b)/,
         /(?<tokyo_tv>\bTokyo TV\b)/,
+        /(?<at_x>AT-[Xx])/,
       ],
 
     //Resolutions
@@ -67,6 +72,7 @@
         /(?<_576p>576[Pp])/,
         /(?<_544p>544[Pp])/,
         /(?<_2160p>2160[Pp])/,
+        /(?<_16_9>720x480|768x576)/,
       ],
 
     //Sources
@@ -80,10 +86,10 @@
         /(?<bluray>HD-?DVD)/,
         /(?<bluray>BD(?=REMUX))/,
         /(?<webdl>WEB[-_. ]?DL)/,
-        /(?<webdl>WEBRIP)/,
+        /(?<webdl>WEB-?R[Ii][Pp])/,
         /(?<webdl>WEBHD)/,
         /(?<webdl>\bONA\b)/,
-        /(?<dvd>DVDR[Ii]P)/,
+        /(?<dvd>DVDR[Ii][Pp])/,
         /(?<dvd>[Dd]vd\s?[Rr]ip)/,
         /(?<dvd>DVD)/,
         /(?<dvd>\bNTSC\b)/,
@@ -100,4 +106,4 @@
         /(?<raw>\bRAW\b)/,
       ],
 
-  })
+  }
