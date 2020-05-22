@@ -1,8 +1,8 @@
 {
   "name": "@lowlighter/rakun",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A parser for anime torrent to extract features",
-  "main": "index.js",
+  "main": "dist/rakun.js",
   "directories": {
     "test": "tests"
   },
@@ -50,5 +50,8 @@
   "homepage": "https://github.com/lowlighter/rakun#readme",
   "engines": {
     "node": ">=14.0.0"
-  }
+  },
+  "files": [
+    "/dist"
+  ]
 }
