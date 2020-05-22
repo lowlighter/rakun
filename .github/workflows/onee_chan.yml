@@ -41,11 +41,13 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm logout || true
+      - run: npm set registry https://registry.npmjs.org
       - run: npm set "//registry.npmjs.org/:_authToken=$NPM_REGISTRY_TOKEN"
-      - run: npm publish --access public --registry https://registry.npmjs.org || true
+      - run: npm publish --access public || true
       - run: npm logout || true
+      - run: npm set registry https://npm.pkg.github.com
       - run: npm set "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN"
-      - run: npm publish --access public --registry https://npm.pkg.github.com || true
+      - run: npm publish --access public || true
       - run: npm logout || true
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
