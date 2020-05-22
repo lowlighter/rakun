@@ -40,11 +40,13 @@ jobs:
           node-version: 14.x
       - run: npm ci
       - run: npm run build
-      - run: echo "" > ~/.npmrc
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_REGISTRY_TOKEN" >> ~/.npmrc
-      - run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" >> ~/.npmrc
+      - run: npm logout || true
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_REGISTRY_TOKEN" > ~/.npmrc
       - run: npm publish --access public --registry https://registry.npmjs.org || true
+      - run: npm logout || true
+      - run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" >> ~/.npmrc
       - run: npm publish --access public --registry https://npm.pkg.github.com || true
+      - run: npm logout || true
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
       NPM_REGISTRY_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
