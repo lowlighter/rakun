@@ -43,9 +43,11 @@ jobs:
       - run: npm config set registry https://registry.npmjs.org
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_REGISTRY_TOKEN" > ~/.npmrc
       - run: npm run publish-if-possible
+      - run: npm logout
       - run: npm config set registry https://npm.pkg.github.com
       - run: echo "//npm.pkg.github.com/:_authToken=$PACKAGE_REGISTRY_TOKEN" > ~/.npmrc
       - run: npm run publish-if-possible
+      - run: npm logout
     env:
       PACKAGE_REGISTRY_TOKEN: ${{ secrets.PACKAGE_REGISTRY_TOKEN }}
       NPM_REGISTRY_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
