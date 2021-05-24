@@ -8,7 +8,7 @@
         extract:[
           /(?<jp>\b[Jj]apanese [Aa]udio\b)/,
           /(?<en>\b[Ee]nglish [Dd]ub\b)/,
-          /(?<en>\b[[Dd]ubbed [Ee]nglish\b)/,
+          /(?<en>\b[\[Dd]ubbed [Ee]nglish\b)/,
           /(?<multi>\b[Mm]ulti[-_. ][Aa]udio\b)/,
           /(?<multi>\bMULT[Ii]\b)/,
           /(?<jp>\bJap\b|\bJAP\b)(?!-[Ss][Uu][Bb])/,

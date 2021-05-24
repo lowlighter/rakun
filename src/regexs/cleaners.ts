@@ -38,9 +38,9 @@
             ],
           },
         //Only brackets, and title not yet found => title is also in brackets
-          only_brackets:/^\[(?<name>[^[]+)\]$/,
+          only_brackets:/^\[(?<name>[^\[]+)\]$/,
         //Unparsable elements, stating from end
-          unparsable:/(?<unparsable>\[[^[]+?\])/,
+          unparsable:/(?<unparsable>\[[^\[]+?\])/,
       },
 
   }
