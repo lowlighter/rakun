@@ -5,7 +5,13 @@
 A parser to extract informations and metadata from anime torrents filename.
 With this, it'll be easier to script anime torrents related stuff !
 
+
 ## 💻 Usage
+
+### 🦝 [Website](https://rakun.app)
+
+If you want to use Rakun online, you can visit the website by [@Wamy-Dev](https://github.com/Wamy-Dev/Rakun.app) at [rakun.app](https://rakun.app).
+
 
 ### 📦 Installation
 
